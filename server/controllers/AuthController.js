@@ -66,11 +66,11 @@ exports.loginUser = async (req, res) => {
 
     //now send the response...
 
-    res.status(200).json({
-      username: isUserExist.username,
-      firstname: isUserExist.firstname,
-      lastname: isUserExist.lastname,
-    });
+    const userWithoutPassword = await User.findOne({ username }).select(
+      "-password"
+    );
+
+    res.status(200).json(userWithoutPassword);
   } catch (error) {
     res.status(500).json(error);
   }
