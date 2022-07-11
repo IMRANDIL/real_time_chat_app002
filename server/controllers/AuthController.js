@@ -36,6 +36,42 @@ exports.registerUser = async (req, res) => {
 };
 
 exports.loginUser = async (req, res) => {
+  const { username, password } = req.body;
+  if (!username || !password) {
+    return res.status(400).json({
+      message: "Please enter all fields",
+    });
+  }
   try {
-  } catch (error) {}
+    //check if username exists
+
+    const isUserExist = await User.findOne({ username });
+
+    if (!isUserExist) {
+      return res.status(400).json({
+        message: "Username does not exist",
+      });
+    }
+
+    const isPasswordValid = await bcrypt.compare(
+      password,
+      isUserExist.password
+    );
+
+    if (!isPasswordValid) {
+      return res.status(400).json({
+        message: "Invalid Credentials",
+      });
+    }
+
+    //now send the response...
+
+    res.status(200).json({
+      username: isUserExist.username,
+      firstname: isUserExist.firstname,
+      lastname: isUserExist.lastname,
+    });
+  } catch (error) {
+    res.status(500).json(error);
+  }
 };
