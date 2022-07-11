@@ -12,6 +12,7 @@ app.use(express.urlencoded({ extended: false }));
 //router ..middleware..
 
 app.use("/chat", require("./routes/ChatRoute"));
+app.use("/", require("./routes/MessageRoute"));
 
 const PORT = process.env.PORT || 8000;
 
