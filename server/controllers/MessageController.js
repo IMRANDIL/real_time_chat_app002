@@ -1,9 +1,18 @@
 const Message = require("../models/MessageModel");
 
 exports.addMessage = async (req, res) => {
+  const { chatId, senderId, text } = req.body;
   try {
+    const message = await Message.create({
+      chatId,
+      senderId,
+      text,
+    });
+
+    res.status(201).json(message);
   } catch (error) {
     console.log(error);
+    res.status(500).json(error);
   }
 };
 
