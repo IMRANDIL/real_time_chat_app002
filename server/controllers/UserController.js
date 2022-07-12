@@ -36,6 +36,10 @@ exports.updateUser = async (req, res) => {
         });
       }
       res.status(200).json(user);
+    } else {
+      return res.status(401).json({
+        message: "Unauthorized",
+      });
     }
   } catch (error) {
     res.status(500).json({ message: error.message });
