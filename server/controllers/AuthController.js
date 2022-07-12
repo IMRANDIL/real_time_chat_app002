@@ -29,7 +29,18 @@ exports.registerUser = async (req, res) => {
       firstname,
       lastname,
     });
-    res.status(201).json(user);
+
+    res.status(201).json({
+      _id: user._id,
+      username: user.username,
+      firstname: user.firstname,
+      lastname: user.lastname,
+      isAdmin: user.isAdmin,
+      followers: user.followers,
+      following: user.following,
+      createdAt: user.createdAt,
+      updatedAt: user.updatedAt,
+    });
   } catch (error) {
     res.status(500).json(error);
   }
@@ -66,11 +77,17 @@ exports.loginUser = async (req, res) => {
 
     //now send the response...
 
-    const userWithoutPassword = await User.findOne({ username }).select(
-      "-password"
-    );
-
-    res.status(200).json(userWithoutPassword);
+    res.status(200).json({
+      _id: isUserExist._id,
+      username: isUserExist.username,
+      firstname: isUserExist.firstname,
+      lastname: isUserExist.lastname,
+      isAdmin: isUserExist.isAdmin,
+      followers: isUserExist.followers,
+      following: isUserExist.following,
+      createdAt: isUserExist.createdAt,
+      updatedAt: isUserExist.updatedAt,
+    });
   } catch (error) {
     res.status(500).json(error);
   }
