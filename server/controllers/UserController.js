@@ -23,9 +23,9 @@ exports.getUser = async (req, res) => {
 
 exports.updateUser = async (req, res) => {
   const { id } = req.params;
-  const { currentUserId, currentUserAdminStatus } = req.body;
+  const { currentUserId, isAdmin } = req.body;
   try {
-    if (id === currentUserId || currentUserAdminStatus) {
+    if (id === currentUserId || isAdmin) {
       const user = await User.findByIdAndUpdate(id, req.body, {
         new: true,
         runValidators: true,
@@ -36,6 +36,31 @@ exports.updateUser = async (req, res) => {
         });
       }
       res.status(200).json(user);
+    } else {
+      return res.status(401).json({
+        message: "Unauthorized",
+      });
+    }
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};
+
+//delete a user...
+
+exports.deleteUser = async (req, res) => {
+  const { id } = req.params;
+  const { currentUserId, isAdmin } = req.body;
+
+  try {
+    if (id === currentUserId || isAdmin) {
+      const user = await User.findByIdAndDelete(id);
+      if (!user) {
+        return res.status(404).json({
+          message: "User not found",
+        });
+      }
+      res.status(200).json({ message: "User deleted" });
     } else {
       return res.status(401).json({
         message: "Unauthorized",
