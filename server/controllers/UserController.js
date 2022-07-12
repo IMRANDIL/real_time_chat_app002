@@ -1,5 +1,5 @@
 const User = require("../models/UserModel");
-
+const bcrypt = require("bcryptjs");
 //get a specific user
 
 exports.getUser = async (req, res) => {
@@ -23,8 +23,12 @@ exports.getUser = async (req, res) => {
 
 exports.updateUser = async (req, res) => {
   const { id } = req.params;
-  const { currentUserId, isAdmin } = req.body;
+  const { currentUserId, isAdmin, password } = req.body;
   try {
+    if (password) {
+      req.body.password = await bcrypt.hash(password, 10);
+    }
+
     if (id === currentUserId || isAdmin) {
       const user = await User.findByIdAndUpdate(id, req.body, {
         new: true,
