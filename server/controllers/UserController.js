@@ -108,3 +108,37 @@ exports.followUser = async (req, res) => {
     res.status(500).json({ message: error.message });
   }
 };
+
+//unfollow a user....
+
+exports.unFollowUser = async (req, res) => {
+  const { id } = req.params;
+
+  const { currentUserId } = req.body;
+
+  if (currentUserId === id) {
+    res.status(403).json("Action forbidden");
+  }
+
+  try {
+    const followUser = await User.findById(id);
+
+    const followingUser = await User.findById(currentUserId);
+
+    if (!followUser || !followingUser) {
+      return res.status(404).json({
+        message: "User not found",
+      });
+    }
+
+    if (followUser.followers.includes(currentUserId)) {
+      await followUser.updateOne({ $pull: { followers: currentUserId } });
+      await followingUser.updateOne({ $pull: { following: id } });
+      res.status(200).json({ message: "User unFollowed" });
+    } else {
+      res.status(403).json("User not followed");
+    }
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};
