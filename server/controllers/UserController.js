@@ -91,6 +91,12 @@ exports.followUser = async (req, res) => {
 
     const followingUser = await User.findById(currentUserId);
 
+    if (!followUser || !followingUser) {
+      return res.status(404).json({
+        message: "User not found",
+      });
+    }
+
     if (!followUser.followers.includes(currentUserId)) {
       await followUser.updateOne({ $push: { followers: currentUserId } });
       await followingUser.updateOne({ $push: { following: id } });
