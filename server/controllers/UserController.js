@@ -75,12 +75,12 @@ exports.deleteUser = async (req, res) => {
   }
 };
 
-//follow a User...
+//follow a User...put one...
 
 exports.followUser = async (req, res) => {
   const { id } = req.params;
 
-  const { currentUserId, isAdmin } = req.body;
+  const { currentUserId } = req.body;
 
   if (currentUserId === id) {
     res.status(403).json("Action forbidden");
