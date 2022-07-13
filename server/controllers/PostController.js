@@ -100,7 +100,7 @@ exports.likeDislikePost = async (req, res) => {
       res.status(200).json("Post liked successfully");
     } else {
       await post.updateOne({ $pull: { likes: userId } });
-      res.status(200).json("Post disliked successfully");
+      res.status(200).json("Post like removed successfully");
     }
   } catch (err) {
     res.status(500).json(err.message);
