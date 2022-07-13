@@ -106,3 +106,15 @@ exports.likeDislikePost = async (req, res) => {
     res.status(500).json(err.message);
   }
 };
+
+//get timeline posts...
+
+exports.getTimelinePosts = async (req, res) => {
+  const userId = req.params.id;
+
+  try {
+    const currentUserPosts = await Post.find({ userId: userId });
+  } catch (error) {
+    res.status(500).json(err.message);
+  }
+};
