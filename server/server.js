@@ -12,6 +12,7 @@ app.use(express.urlencoded({ extended: false }));
 //router ..middleware..
 app.use("/auth", require("./routes/AuthRoute"));
 app.use("/user", require("./routes/UserRoute"));
+app.use("/post", require("./routes/PostRoute"));
 app.use("/chat", require("./routes/ChatRoute"));
 app.use("/message", require("./routes/MessageRoute"));
 
