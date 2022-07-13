@@ -39,7 +39,17 @@ exports.updateUser = async (req, res) => {
           message: "User not found",
         });
       }
-      res.status(200).json(user);
+      res.status(200).json({
+        username: user.username,
+        _id: user._id,
+        firstname: user.firstname,
+        lastname: user.lastname,
+        following: user.following,
+        followers: user.followers,
+        isAdmin: user.isAdmin,
+        createdAt: user.createdAt,
+        updatedAt: user.updatedAt,
+      });
     } else {
       return res.status(401).json({
         message: "Unauthorized",
