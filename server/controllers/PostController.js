@@ -10,7 +10,7 @@ exports.createPost = async (req, res) => {
     const isUser = await User.findById(userId);
 
     if (!isUser) {
-      res.status(401).json({ message: "Bad Request" });
+      return res.status(401).json({ message: "Bad Request" });
     }
 
     const post = await Post.create(req.body);
@@ -51,7 +51,7 @@ exports.updatePost = async (req, res) => {
       return res.status(401).json({ message: "unauthorized" });
     }
 
-    await Post.updateOne({ $set: req.body });
+    await post.updateOne({ $set: req.body });
 
     res.status(200).json("Post updated successfully");
   } catch (err) {
