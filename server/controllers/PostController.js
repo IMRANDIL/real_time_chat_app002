@@ -42,12 +42,13 @@ exports.updatePost = async (req, res) => {
 
   try {
     const post = await Post.findById(req.params.id);
-    if (post.userId !== userId) {
-      return res.status(401).json({ message: "unauthorized" });
-    }
 
     if (!post) {
       return res.status(404).json({ message: "Post not found" });
+    }
+
+    if (post.userId !== userId) {
+      return res.status(401).json({ message: "unauthorized" });
     }
 
     await Post.updateOne({ $set: req.body });
