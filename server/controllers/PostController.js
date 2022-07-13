@@ -1,6 +1,6 @@
 const Post = require("../models/PostModel");
 const User = require("../models/UserModel");
-
+const mongoose = require("mongoose");
 //create a new post...
 
 exports.createPost = async (req, res) => {
@@ -132,7 +132,9 @@ exports.getTimelinePosts = async (req, res) => {
         },
       },
     ]);
+
+    res.status(200).json([...currentUserPosts, ...followingUsersPosts]);
   } catch (error) {
-    res.status(500).json(err.message);
+    res.status(500).json(error.message);
   }
 };
