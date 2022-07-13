@@ -50,11 +50,9 @@ exports.updatePost = async (req, res) => {
       res.status(404).json({ message: "Post not found" });
     }
 
-    const updatedPost = await Post.findByIdAndUpdate(req.params.id, req.body, {
-      new: true,
-    });
+    const updatedPost = await Post.updateOne({ $set: req.body });
 
-    res.status(200).json(updatedPost);
+    res.status(200).json("Post updated successfully");
   } catch (err) {
     res.status(500).json(err);
   }
