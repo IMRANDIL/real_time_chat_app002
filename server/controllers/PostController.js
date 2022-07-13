@@ -41,20 +41,20 @@ exports.updatePost = async (req, res) => {
   const { userId } = req.body;
 
   try {
-    const isUser = await User.findById(userId);
-
-    if (!isUser) {
-      res.status(401).json({ message: "Bad Request" });
+    const post = await Post.findById(req.params.id);
+    if (post.userId !== userId) {
+      res.status(401).json({ message: "unauthorized" });
     }
 
-    const post = await Post.findByIdAndUpdate(req.params.id, req.body, {
-      new: true,
-    });
     if (!post) {
       res.status(404).json({ message: "Post not found" });
     }
 
-    res.status(200).json(post);
+    const updatedPost = await Post.findByIdAndUpdate(req.params.id, req.body, {
+      new: true,
+    });
+
+    res.status(200).json(updatedPost);
   } catch (err) {
     res.status(500).json(err);
   }
