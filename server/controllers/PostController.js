@@ -82,3 +82,27 @@ exports.deletePost = async (req, res) => {
     res.status(500).json(err.message);
   }
 };
+
+//like/dislike a post...
+
+exports.likeDislikePost = async (req, res) => {
+  const { userId } = req.body;
+
+  try {
+    const post = await Post.findById(req.params.id);
+
+    if (!post) {
+      return res.status(404).json({ message: "Post not found" });
+    }
+
+    if (!post.likes.includes(userId)) {
+      await post.updateOne({ $push: { likes: userId } });
+      res.status(200).json("Post liked successfully");
+    } else {
+      await post.updateOne({ $pull: { likes: userId } });
+      res.status(200).json("Post disliked successfully");
+    }
+  } catch (err) {
+    res.status(500).json(err.message);
+  }
+};
