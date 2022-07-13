@@ -114,6 +114,24 @@ exports.getTimelinePosts = async (req, res) => {
 
   try {
     const currentUserPosts = await Post.find({ userId: userId });
+
+    const followingUsersPosts = await User.aggregate([
+      { $match: { _id: new mongoose.Types.ObjectId(userId) } },
+      {
+        $lookup: {
+          from: "posts",
+          localField: "following",
+          foreignField: "userId",
+          as: "followingPosts",
+        },
+      },
+      {
+        $project: {
+          followingPosts: 1,
+          _id: 0,
+        },
+      },
+    ]);
   } catch (error) {
     res.status(500).json(err.message);
   }
