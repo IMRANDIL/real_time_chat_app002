@@ -1,7 +1,12 @@
 import "./App.css";
 
 function App() {
-  return <div className="App">hey ali chat man</div>;
+  return (
+    <div className="app">
+      <div className="blur"></div>
+      <div className="blur"></div>
+    </div>
+  );
 }
 
 export default App;
