@@ -14,6 +14,7 @@ const FollowersCard = () => {
               src={follower.img}
               alt={follower.username}
               className="followerImg"
+              draggable="false"
             />
             <div className="name">
               <span>{follower.name}</span>
