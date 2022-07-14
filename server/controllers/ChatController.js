@@ -41,7 +41,7 @@ exports.findChat = async (req, res) => {
     });
 
     if (!chat) {
-      res.status(404).json({ message: "No chat found" });
+      return res.status(404).json({ message: "No chat found" });
     }
     res.status(200).json(chat);
   } catch (error) {
