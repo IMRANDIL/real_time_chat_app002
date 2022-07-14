@@ -1,4 +1,5 @@
 import React from "react";
+import ProfileCard from "../../components/ProfileCard/ProfileCard";
 import ProfileSide from "../../components/ProfileSide/ProfileSide";
 import "./Home.css";
 
@@ -6,7 +7,7 @@ const Home = () => {
   return (
     <div className="home">
       <ProfileSide />
-      <div className="postSide">Post</div>
+      <ProfileCard />
       <div className="rightSide">Right</div>
     </div>
   );
