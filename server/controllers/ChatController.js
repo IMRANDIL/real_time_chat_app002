@@ -21,8 +21,8 @@ exports.userChats = async (req, res) => {
       members: { $in: [req.params.userId] },
     });
 
-    if (!chat) {
-      res.status(404).json({ message: "No chats found" });
+    if (chat.length === 0) {
+      return res.status(404).json({ message: "No chats found" });
     }
 
     res.status(200).json(chat);
