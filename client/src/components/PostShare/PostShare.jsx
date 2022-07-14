@@ -58,9 +58,9 @@ const PostShare = () => {
           </div>
         </div>
         {image && (
-          <div className="previewImg" style={{ cursor: "pointer" }}>
+          <div className="previewImg">
             <UilTimes onClick={() => setImage(null)} />
-            <img src={image.image} alt="uploaded-img" />
+            <img src={image.image} alt="preview-img" />
           </div>
         )}
       </div>

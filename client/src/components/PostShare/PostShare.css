@@ -60,3 +60,22 @@
     padding-right: 20px;
     font-size: 12px;
 }
+
+
+.previewImg{
+    position:relative;
+}
+
+.previewImg>svg{
+    position: absolute;
+    right: 1rem;
+    top:0.5rem;
+    cursor: pointer;
+}
+
+.previewImg>img{
+    width: 100%;
+    max-height: 20rem;
+    object-fit: cover;
+    border-radius: 0.5rem;
+}
