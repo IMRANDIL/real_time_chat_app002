@@ -4,7 +4,7 @@
     justify-content: center;
     height: 100vh;
     gap:4rem;
-    postion: relative;
+    position: relative;
 }
 
 .auth-left{
@@ -20,12 +20,13 @@
   height:4rem;
 }
 
-.webname >h1{
+.logoGrad{
     font-size: 3rem;
     background-color: red;
+    background-image: var(--buttonBg);
 
     /* create the gradient now */
-    background-image:var(--buttonBg);
+
 
     /* set the background size and repeat properties */
 
@@ -34,8 +35,9 @@
 
     /* use the text as a mask for the background */
 
-    --webkit-background-clip: text;
-    --webkit-text-fill-color: transparent;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
     -moz-background-clip: text;
     -moz-text-fill-color: transparent;
+    
 }

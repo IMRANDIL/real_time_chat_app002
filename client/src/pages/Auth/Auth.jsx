@@ -7,7 +7,7 @@ const Auth = () => {
       <div className="auth-left">
         <img src={LogoImg} alt="logo-img" draggable="false" />
         <div className="webname">
-          <h1>AIA Hub</h1>
+          <h1 className="logoGrad">AIA Hub</h1>
           <h6>Explore the world of possibilities!</h6>
         </div>
       </div>
