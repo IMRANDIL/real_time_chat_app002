@@ -7,7 +7,7 @@ const Posts = () => {
   return (
     <div className="posts">
       {PostData.map((post) => (
-        <Post post={post} />
+        <Post post={post} key={post.id} />
       ))}
     </div>
   );

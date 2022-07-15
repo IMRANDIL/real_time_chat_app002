@@ -64,6 +64,7 @@
 
 .previewImg{
     position:relative;
+    zindex:2000;
 }
 
 .previewImg>svg{
