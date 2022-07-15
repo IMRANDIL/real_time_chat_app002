@@ -10,3 +10,9 @@
     justify-content: space-between;
     margin-top: 1rem;
 }
+
+.navIcons>img{
+    width: 1.5rem;
+    height: 1.5rem;
+    cursor: pointer;
+}
