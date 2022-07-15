@@ -8,11 +8,11 @@ import NotLike from "../../img/notlike.png";
 const Post = ({ post }) => {
   return (
     <div className="post">
-      <img src={post.img} alt="post-img" />
+      <img src={post.img} alt="post-img" draggable="false" />
       <div className="postReact">
         <img src={post.liked ? Heart : NotLike} alt="like-unlike-img" />
-        <img src={Comment} alt="comment-img" />
-        <img src={Share} alt="share-img" />
+        <img src={Comment} alt="comment-img" draggable="false" />
+        <img src={Share} alt="share-img" draggable="false" />
       </div>
       <span>{post.likes} likes</span>
       <div className="detail">
