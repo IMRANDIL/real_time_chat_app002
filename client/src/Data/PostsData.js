@@ -4,6 +4,7 @@ import postPic3 from "../img/postpic3.jpeg";
 
 export const PostData = [
   {
+    id: 1,
     img: postPic1,
     name: "TakaNaka",
     des: "Happy New Year All Friends! 2024",
@@ -11,6 +12,7 @@ export const PostData = [
     liked: true,
   },
   {
+    id: 2,
     img: postPic2,
     name: "MakaNaka",
     des: "Let's Rock It!",
@@ -18,6 +20,7 @@ export const PostData = [
     liked: false,
   },
   {
+    id: 3,
     img: postPic3,
     name: "LakaNaka",
     des: "Let's throw the party!",
