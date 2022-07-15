@@ -33,7 +33,7 @@ const InfoCard = () => {
         <span> Freelancing</span>
       </div>
 
-      <button className="button">Logout</button>
+      <button className="button log-button">Logout</button>
     </div>
   );
 };
