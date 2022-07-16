@@ -64,7 +64,7 @@ function Signup() {
               type="email"
               className="infoInput"
               name="username"
-              placeholder="Username"
+              placeholder="User Name"
               required
               onChange={handleInput}
             />
