@@ -50,7 +50,45 @@
     margin-top:-17px;
 }
 
-.auth-right{
+/* .auth-right{
     display:flex;
     
+} */
+.info{
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items: center;
+    gap:1.5rem;
 }
+
+.info>div{
+    display: flex;
+    gap:1rem;
+    justify-content: center;
+    height: 2rem;
+    width: 100%;
+}
+
+
+.infoInput{
+    border:none;
+    outline: none;
+    background-color: var(--inputColor);
+    border-radius: 8px;
+    padding:20px;
+    flex:1;
+}
+
+.auth-button{
+    width:30%;
+  padding:10px 20px;
+    align-self: flex-end;
+}
+
+.auth-form{
+    background-color: var(--cardColor);
+    border-radius: 1rem;
+    padding:1rem;
+}
+

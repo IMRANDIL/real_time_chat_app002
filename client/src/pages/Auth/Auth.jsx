@@ -1,5 +1,6 @@
 import React from "react";
 import LogoImg from "../../img/logo.png";
+import { Link } from "react-router-dom";
 import "./Auth.css";
 const Auth = () => {
   return (
@@ -19,7 +20,7 @@ const Auth = () => {
 function Signup() {
   return (
     <div className="auth-right">
-      <form className="info">
+      <form className="info auth-form">
         <h3>Sign up</h3>
         <div>
           <input
@@ -27,6 +28,7 @@ function Signup() {
             placeholder="First Name"
             className="infoInput"
             name="firstname"
+            required
           />
 
           <input
@@ -34,6 +36,7 @@ function Signup() {
             placeholder="Last Name"
             className="infoInput"
             name="lastname"
+            required
           />
         </div>
         <div>
@@ -41,14 +44,34 @@ function Signup() {
             type="text"
             className="infoInput"
             name="username"
-            placeholder="user name"
+            placeholder="Username"
+            required
           />
         </div>
         <div>
-          <input type="text" className="infoInput" name="" placeholder="" />
-          <input type="text" className="infoInput" name="" placeholder="" />
+          <input
+            type="password"
+            className="infoInput"
+            name="password"
+            placeholder="Password"
+            required
+          />
+          <input
+            type="password"
+            className="infoInput"
+            name="password"
+            placeholder="Confirm Password"
+            required
+          />
         </div>
-        <button className="button">Signup</button>
+        <button type="submit" className="button auth-button">
+          Signup
+        </button>
+        <div className="confirmbee">
+          <span>
+            Already a bee? <Link to="/login">Login</Link>
+          </span>
+        </div>
       </form>
     </div>
   );
