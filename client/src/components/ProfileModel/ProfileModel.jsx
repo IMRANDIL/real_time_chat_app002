@@ -1,5 +1,4 @@
 import React from "react";
-import "./ProfileModel.css";
 
 import { Modal, useMantineTheme } from "@mantine/core";
 
@@ -15,7 +14,7 @@ function ProfileModel({ modalOpen, setModalOpen }) {
       }
       overlayOpacity={0.55}
       overlayBlur={3}
-      size="55%"
+      size="45%"
       opened={modalOpen}
       onClose={() => setModalOpen(false)}
     >
@@ -71,6 +70,8 @@ function ProfileModel({ modalOpen, setModalOpen }) {
           Cover Image
           <input type="file" name="CoverImg" />
         </div>
+
+        <button className="button log-button">Update</button>
       </form>
     </Modal>
   );
