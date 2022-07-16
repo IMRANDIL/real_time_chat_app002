@@ -37,8 +37,18 @@ function Signup() {
           />
         </div>
         <div>
-          <input type="text" className="infoInput" name="username" />
+          <input
+            type="text"
+            className="infoInput"
+            name="username"
+            placeholder="user name"
+          />
         </div>
+        <div>
+          <input type="text" className="infoInput" name="" placeholder="" />
+          <input type="text" className="infoInput" name="" placeholder="" />
+        </div>
+        <button className="button">Signup</button>
       </form>
     </div>
   );
