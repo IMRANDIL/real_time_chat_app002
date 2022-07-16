@@ -7,7 +7,7 @@ const InfoCard = () => {
   const [modalOpen, setModalOpen] = useState(false);
 
   const handleModal = () => {
-    setModalOpen(!modalOpen);
+    setModalOpen(true);
   };
 
   return (
@@ -16,7 +16,7 @@ const InfoCard = () => {
         <h4>Your Info</h4>
         <div>
           <UilPen width="2rem" height="1.2rem" onClick={handleModal} />
-          <ProfileModel />
+          <ProfileModel modalOpen={modalOpen} setModalOpen={setModalOpen} />
         </div>
       </div>
 

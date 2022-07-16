@@ -3,7 +3,7 @@ import "./ProfileModel.css";
 
 import { Modal, useMantineTheme } from "@mantine/core";
 
-function ProfileModel() {
+function ProfileModel({ modalOpen, setModalOpen }) {
   const theme = useMantineTheme();
 
   return (
@@ -15,6 +15,8 @@ function ProfileModel() {
       }
       overlayOpacity={0.55}
       overlayBlur={3}
+      opened={modalOpen}
+      onClose={() => setModalOpen(false)}
     >
       <form className="infoAuth">
         <h3>Your info</h3>
