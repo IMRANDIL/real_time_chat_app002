@@ -5,7 +5,7 @@ import Auth from "./Auth";
 
 function Signup() {
   return (
-    <>
+    <div className="container">
       <Auth />
 
       <div className="auth-right">
@@ -63,7 +63,7 @@ function Signup() {
           </div>
         </form>
       </div>
-    </>
+    </div>
   );
 }
 
