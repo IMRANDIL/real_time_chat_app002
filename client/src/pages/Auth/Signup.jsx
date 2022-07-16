@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import "./Auth.css";
-import { Link } from "react-router-dom";
+import { toast } from "react-toastify";
+import { Link, useNavigate } from "react-router-dom";
 import Auth from "./Auth";
 
 function Signup() {
@@ -11,13 +12,33 @@ function Signup() {
     password: "",
     confirmpassword: "",
   });
+  const navigation = useNavigate();
+  const handleInput = (e) => {
+    setData({ ...data, [e.target.name]: e.target.value });
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    if (data.password !== data.confirmpassword) {
+      toast.error("Passwords do not match");
+    } else {
+      setData({
+        firstname: "",
+        lastname: "",
+        username: "",
+        password: "",
+        confirmpassword: "",
+      });
+      navigation("/");
+    }
+  };
 
   return (
     <div className="container">
       <Auth />
 
       <div className="auth-right">
-        <form className="infoAuth auth-form">
+        <form className="infoAuth auth-form" onSubmit={handleSubmit}>
           <h3>Sign up</h3>
           <div>
             <input
@@ -26,6 +47,7 @@ function Signup() {
               className="infoInput"
               name="firstname"
               required
+              onChange={handleInput}
             />
 
             <input
@@ -34,15 +56,17 @@ function Signup() {
               className="infoInput"
               name="lastname"
               required
+              onChange={handleInput}
             />
           </div>
           <div>
             <input
-              type="text"
+              type="email"
               className="infoInput"
               name="username"
               placeholder="Username"
               required
+              onChange={handleInput}
             />
           </div>
           <div>
@@ -52,6 +76,7 @@ function Signup() {
               name="password"
               placeholder="Password"
               required
+              onChange={handleInput}
             />
             <input
               type="password"
@@ -59,6 +84,7 @@ function Signup() {
               name="confirmpassword"
               placeholder="Confirm Password"
               required
+              onChange={handleInput}
             />
           </div>
           <button type="submit" className="button auth-button">
