@@ -11,9 +11,27 @@ const Auth = () => {
           <h6>Explore the world of possibilities!</h6>
         </div>
       </div>
-      <h1>Form</h1>
+      <Signup />
     </div>
   );
 };
+
+function Signup() {
+  return (
+    <div className="auth-right">
+      <form className="info">
+        <h3>Sign up</h3>
+        <div>
+          <input
+            type="text"
+            placeholder="First Name"
+            className="infoInput"
+            name="firstname"
+          />
+        </div>
+      </form>
+    </div>
+  );
+}
 
 export default Auth;
