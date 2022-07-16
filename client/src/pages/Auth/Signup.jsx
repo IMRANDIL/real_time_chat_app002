@@ -1,9 +1,17 @@
-import React from "react";
+import React, { useState } from "react";
 import "./Auth.css";
 import { Link } from "react-router-dom";
 import Auth from "./Auth";
 
 function Signup() {
+  const [data, setData] = useState({
+    firstname: "",
+    lastname: "",
+    username: "",
+    password: "",
+    confirmpassword: "",
+  });
+
   return (
     <div className="container">
       <Auth />
@@ -48,7 +56,7 @@ function Signup() {
             <input
               type="password"
               className="infoInput"
-              name="password"
+              name="confirmpassword"
               placeholder="Confirm Password"
               required
             />
