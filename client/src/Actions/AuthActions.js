@@ -19,7 +19,7 @@ export const registerUser = (userData) => async (dispatch) => {
     };
 
     const { data } = await axios.post("/auth/register", userData, config);
-
+    console.log(data);
     dispatch({
       type: SIGNUP_SUCCESS,
       payload: data,
@@ -29,7 +29,11 @@ export const registerUser = (userData) => async (dispatch) => {
     console.log(error);
     dispatch({
       type: SIGNUP_FAIL,
-      payload: error.response.data.error,
+      payload: error.response?.data.message
+        ? error.response.data.message
+        : error.response?.data
+        ? error.response.data
+        : error.message,
     });
   }
 };

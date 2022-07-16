@@ -1,9 +1,10 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./Auth.css";
 import { useDispatch, useSelector } from "react-redux";
 import { registerUser } from "../../Actions/AuthActions";
 import { toast } from "react-toastify";
 import { Link, useNavigate } from "react-router-dom";
+import { SIGNUP_RESET } from "../../Constants/AuthConstant";
 import Auth from "./Auth";
 
 function Signup() {
@@ -15,10 +16,22 @@ function Signup() {
     confirmpassword: "",
   });
   const dispatch = useDispatch();
+  const { error, success } = useSelector((state) => state.registerUser);
   const navigation = useNavigate();
   const handleInput = (e) => {
     setData({ ...data, [e.target.name]: e.target.value });
   };
+
+  useEffect(() => {
+    if (success) {
+      navigation("/");
+    } else {
+      toast.error(error);
+      dispatch({
+        type: SIGNUP_RESET,
+      });
+    }
+  }, [success, navigation, dispatch, error]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -33,7 +46,6 @@ function Signup() {
         password: "",
         confirmpassword: "",
       });
-      navigation("/");
     }
   };
 

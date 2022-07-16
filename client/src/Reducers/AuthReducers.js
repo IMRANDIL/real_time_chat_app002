@@ -8,7 +8,7 @@ import {
 export const userSignup = (state = {}, action) => {
   switch (action.type) {
     case SIGNUP_REQUEST:
-      return { loading: true };
+      return { ...state, loading: true };
     case SIGNUP_SUCCESS:
       return { loading: false, success: true, userInfo: action.payload };
     case SIGNUP_RESET:
