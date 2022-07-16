@@ -18,15 +18,18 @@ export const registerUser = (userData) => async (dispatch) => {
       },
     };
 
-    const { data } = await axios.post(
-      "http://localhost:6000/auth/register",
-      userData,
-      config
-    );
+    const { data } = await axios.post("/auth/register", userData, config);
 
     dispatch({
       type: SIGNUP_SUCCESS,
       payload: data,
     });
-  } catch (error) {}
+    localStorage.setItem("userInfo", JSON.stringify(data));
+  } catch (error) {
+    console.log(error);
+    dispatch({
+      type: SIGNUP_FAIL,
+      payload: error.response.data.error,
+    });
+  }
 };

@@ -10,7 +10,7 @@ export const userSignup = (state = {}, action) => {
     case SIGNUP_REQUEST:
       return { loading: true };
     case SIGNUP_SUCCESS:
-      return { loading: false, userInfo: action.payload };
+      return { loading: false, success: true, userInfo: action.payload };
     case SIGNUP_RESET:
       return {};
     case SIGNUP_FAIL:

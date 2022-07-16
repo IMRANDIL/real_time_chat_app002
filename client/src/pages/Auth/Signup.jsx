@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import "./Auth.css";
 import { useDispatch, useSelector } from "react-redux";
+import { registerUser } from "../../Actions/AuthActions";
 import { toast } from "react-toastify";
 import { Link, useNavigate } from "react-router-dom";
 import Auth from "./Auth";
@@ -24,7 +25,7 @@ function Signup() {
     if (data.password !== data.confirmpassword) {
       toast.error("Passwords do not match");
     } else {
-      dispatch(data);
+      dispatch(registerUser(data));
       setData({
         firstname: "",
         lastname: "",
