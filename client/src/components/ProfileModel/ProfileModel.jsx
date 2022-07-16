@@ -15,11 +15,62 @@ function ProfileModel({ modalOpen, setModalOpen }) {
       }
       overlayOpacity={0.55}
       overlayBlur={3}
+      size="55%"
       opened={modalOpen}
       onClose={() => setModalOpen(false)}
     >
       <form className="infoAuth">
         <h3>Your info</h3>
+        <div>
+          <input
+            type="text"
+            placeholder="First Name"
+            className="infoInput"
+            name="firstname"
+          />
+
+          <input
+            type="text"
+            placeholder="Last Name"
+            className="infoInput"
+            name="lastname"
+          />
+        </div>
+        <div>
+          <input
+            type="text"
+            className="infoInput"
+            placeholder="Works At"
+            name="worksAt"
+          />
+        </div>
+        <div>
+          <input
+            type="text"
+            className="infoInput"
+            placeholder="Lives In"
+            name="livesIn"
+          />
+          <input
+            type="text"
+            className="infoInput"
+            placeholder="Country"
+            name="country"
+          />
+        </div>
+        <div>
+          <input
+            type="text"
+            className="infoInput"
+            placeholder="Relationship Status"
+          />
+        </div>
+        <div>
+          Profile Image
+          <input type="file" name="ProfileImg" />
+          Cover Image
+          <input type="file" name="CoverImg" />
+        </div>
       </form>
     </Modal>
   );
