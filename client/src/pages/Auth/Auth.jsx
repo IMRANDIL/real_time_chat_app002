@@ -1,7 +1,7 @@
 import React from "react";
 import LogoImg from "../../img/logo.png";
 import "./Auth.css";
-import Signup from "./Signup";
+
 const Auth = () => {
   return (
     <div className="auth">
@@ -12,7 +12,6 @@ const Auth = () => {
           <h6>Explore the world of possibilities!</h6>
         </div>
       </div>
-      <Signup />
     </div>
   );
 };
