@@ -18,6 +18,7 @@ function App() {
 
           <Route path="/auth/register" element={<Signup />} />
           <Route path="/auth/login" element={<Login />} />
+          <Route path="*" element={<Signup />} />
         </Routes>
       </BrowserRouter>
     </div>

@@ -9,7 +9,7 @@ function Signup() {
       <Auth />
 
       <div className="auth-right">
-        <form className="info auth-form">
+        <form className="infoAuth auth-form">
           <h3>Sign up</h3>
           <div>
             <input

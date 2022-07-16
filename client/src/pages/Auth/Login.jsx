@@ -8,7 +8,7 @@ function Login() {
     <div className="container">
       <Auth />
       <div className="auth-right">
-        <form className="info auth-form">
+        <form className="infoAuth auth-form">
           <h3>Login</h3>
           <div>
             <input

@@ -51,7 +51,7 @@
 }
 
 
-.info{
+.infoAuth{
     display:flex;
     flex-direction:column;
     justify-content:center;
@@ -60,7 +60,7 @@
     width: 100%;
 }
 
-.info>div{
+.infoAuth>div{
     display: flex;
     gap:1rem;
     justify-content: center;
