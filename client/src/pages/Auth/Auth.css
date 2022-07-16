@@ -9,16 +9,19 @@
 
 .auth-left{
     display:flex;
-    gap:2rem;
+    gap:1rem;
     justify-content: center;
     align-items: center;
 }
+
 
 .auth-left>img{
     object-fit: contain;
     width:4rem;
   height:4rem;
 }
+
+
 
 .logoGrad{
     font-size: 3rem;
@@ -44,4 +47,5 @@
 
 .webname>h6{
     font-size: 0.85rem;
+    margin-top:-17px;
 }
