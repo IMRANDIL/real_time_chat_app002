@@ -1,8 +1,9 @@
 import "./App.css";
 import Home from "./pages/Home/Home";
 import Profile from "./pages/Profile/Profile";
-import Auth from "./pages/Auth/Auth";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+import Signup from "./pages/Auth/Signup";
+import Login from "./pages/Auth/Login";
 
 function App() {
   return (
@@ -15,7 +16,8 @@ function App() {
 
           <Route path="/profile" element={<Profile />} />
 
-          <Route path="/auth" element={<Auth />} />
+          <Route path="/auth/register" element={<Signup />} />
+          <Route path="/auth/login" element={<Login />} />
         </Routes>
       </BrowserRouter>
     </div>
