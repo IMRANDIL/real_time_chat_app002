@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import "./Auth.css";
+import { useDispatch, useSelector } from "react-redux";
 import { toast } from "react-toastify";
 import { Link, useNavigate } from "react-router-dom";
 import Auth from "./Auth";
@@ -12,6 +13,7 @@ function Signup() {
     password: "",
     confirmpassword: "",
   });
+  const dispatch = useDispatch();
   const navigation = useNavigate();
   const handleInput = (e) => {
     setData({ ...data, [e.target.name]: e.target.value });
@@ -22,6 +24,7 @@ function Signup() {
     if (data.password !== data.confirmpassword) {
       toast.error("Passwords do not match");
     } else {
+      dispatch(data);
       setData({
         firstname: "",
         lastname: "",
