@@ -7,6 +7,7 @@ import { UilPlayCircle } from "@iconscout/react-unicons";
 import { UilLocationPoint } from "@iconscout/react-unicons";
 import { UilSchedule } from "@iconscout/react-unicons";
 import { UilTimes } from "@iconscout/react-unicons";
+import { uploadImage } from "../../Actions/uploadActons";
 
 const PostShare = () => {
   const [image, setImage] = useState(null);
@@ -35,6 +36,7 @@ const PostShare = () => {
       data.append("file", image);
       newPost.image = filename;
       console.log(newPost);
+      dispatch(uploadImage(data));
     }
   };
 

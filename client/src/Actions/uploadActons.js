@@ -5,18 +5,18 @@ import {
   UPLOAD_FAIL,
 } from "../Constants/UploadContant";
 
-exports.uploadImage = (uploadData) => async (dispatch) => {
+export const uploadImage = (uploadData) => async (dispatch) => {
   try {
     dispatch({
       type: UPLOAD_REQUEST,
     });
     const config = {
       headers: {
-        "Content-Type": "application/json",
+        "Content-Type": "multipart/form-data",
       },
     };
 
-    const { data } = await axios.post("/upload", uploadData, config);
+    const { data } = await axios.post("/upload/", uploadData, config);
     dispatch({
       type: UPLOAD_SUCCESS,
       payload: data,

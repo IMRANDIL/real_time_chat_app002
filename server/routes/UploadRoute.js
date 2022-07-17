@@ -1,8 +1,6 @@
 const router = require("express").Router();
 const multer = require("multer");
 
-router.route("/").post();
-
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
     cb(null, "public/images");
@@ -13,5 +11,16 @@ const storage = multer.diskStorage({
 });
 
 const upload = multer({ storage: storage });
+
+router.post(
+  "/",
+  upload.single("file", (req, res) => {
+    try {
+      return res.status(200).json("File uploaded successfully");
+    } catch (error) {
+      console.log(error);
+    }
+  })
+);
 
 module.exports = router;
