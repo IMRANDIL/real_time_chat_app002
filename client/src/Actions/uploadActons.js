@@ -16,7 +16,11 @@ export const uploadImage = (uploadData) => async (dispatch) => {
       },
     };
 
-    const { data } = await axios.post("/upload/", uploadData, config);
+    const { data } = await axios.post(
+      "http://localhost:5000/upload",
+      uploadData,
+      config
+    );
     dispatch({
       type: UPLOAD_SUCCESS,
       payload: data,

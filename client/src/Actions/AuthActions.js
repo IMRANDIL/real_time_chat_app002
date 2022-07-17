@@ -23,7 +23,11 @@ export const registerUser = (userData) => async (dispatch) => {
       },
     };
 
-    const { data } = await axios.post("/auth/register", userData, config);
+    const { data } = await axios.post(
+      "http://localhost:5000/auth/register",
+      userData,
+      config
+    );
 
     dispatch({
       type: SIGNUP_SUCCESS,
@@ -54,7 +58,11 @@ export const loginUser = (userData) => async (dispatch) => {
       },
     };
 
-    const { data } = await axios.post("/auth/login", userData, config);
+    const { data } = await axios.post(
+      "http://localhost:5000/auth/login",
+      userData,
+      config
+    );
 
     dispatch({
       type: LOGIN_SUCCESS,

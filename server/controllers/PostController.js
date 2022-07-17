@@ -4,7 +4,11 @@ const mongoose = require("mongoose");
 //create a new post...
 
 exports.createPost = async (req, res) => {
-  const { userId } = req.body;
+  const { userId, description } = req.body;
+
+  if (!description) {
+    return res.status(400).json({ message: "Please add a description" });
+  }
 
   try {
     const isUser = await User.findById(userId);

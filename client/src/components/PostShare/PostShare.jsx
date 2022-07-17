@@ -10,13 +10,18 @@ import { postAction } from "../../Actions/PostActions";
 import { UilSchedule } from "@iconscout/react-unicons";
 import { UilTimes } from "@iconscout/react-unicons";
 import { uploadImage } from "../../Actions/uploadActons";
+import { POST_RESET } from "../../Constants/PostConstant";
 
 const PostShare = () => {
   const [image, setImage] = useState(null);
   const dispatch = useDispatch();
   const { userInfo } = useSelector((state) => state.registerUser);
   const { error: uploadError } = useSelector((state) => state.uploadFile);
-  const { error: postError } = useSelector((state) => state.userPost);
+  const {
+    error: postError,
+    loading: loadingPost,
+    success: postSuccess,
+  } = useSelector((state) => state.userPost);
   const imageRef = useRef();
   const desc = useRef();
   const handleImage = (e) => {
@@ -49,8 +54,14 @@ const PostShare = () => {
   useEffect(() => {
     if (postError || uploadError) {
       toast.error(postError || uploadError);
+      dispatch({ type: POST_RESET });
     }
-  }, [postError, uploadError]);
+
+    if (postSuccess) {
+      setImage(null);
+      desc.current.value = "";
+    }
+  }, [postError, uploadError, postSuccess, dispatch]);
 
   return (
     <div className="postShare">
@@ -83,8 +94,12 @@ const PostShare = () => {
             <UilSchedule />
             Shedule
           </div>
-          <button className="button ps-button" onClick={handleShare}>
-            Share
+          <button
+            className="button ps-button"
+            onClick={handleShare}
+            disabled={loadingPost}
+          >
+            {loadingPost ? "Sharing..." : "Share"}
           </button>
           <div style={{ display: "none" }}>
             <input

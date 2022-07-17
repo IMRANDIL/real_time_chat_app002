@@ -14,7 +14,11 @@ export const postAction = (postData) => async (dispatch) => {
       },
     };
 
-    const { data } = await axios.post("/post", postData, config);
+    const { data } = await axios.post(
+      "http://localhost:5000/post",
+      postData,
+      config
+    );
     dispatch({ type: POST_SUCCESS, payload: data });
   } catch (error) {
     dispatch({
