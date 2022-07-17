@@ -1,5 +1,6 @@
 const User = require("../models/UserModel");
 const bcrypt = require("bcryptjs");
+const generateJwt = require("../Utils/generateJwt");
 
 exports.registerUser = async (req, res) => {
   const { username, password, firstname, lastname } = req.body;
@@ -40,6 +41,7 @@ exports.registerUser = async (req, res) => {
       following: user.following,
       createdAt: user.createdAt,
       updatedAt: user.updatedAt,
+      token: generateJwt(user._id),
     });
   } catch (error) {
     res.status(500).json(error);
@@ -87,6 +89,7 @@ exports.loginUser = async (req, res) => {
       following: isUserExist.following,
       createdAt: isUserExist.createdAt,
       updatedAt: isUserExist.updatedAt,
+      token: generateJwt(isUserExist._id),
     });
   } catch (error) {
     res.status(500).json(error);
