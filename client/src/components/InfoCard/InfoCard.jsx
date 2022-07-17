@@ -1,13 +1,22 @@
 import React, { useState } from "react";
 import "./InfoCard.css";
+import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
 import { UilPen } from "@iconscout/react-unicons";
 import ProfileModel from "../ProfileModel/ProfileModel";
+import { logoutUser } from "../../Actions/AuthActions";
 
 const InfoCard = () => {
   const [modalOpen, setModalOpen] = useState(false);
-
+  const navigation = useNavigate();
+  const dispatch = useDispatch();
   const handleModal = () => {
     setModalOpen(true);
+  };
+
+  const handleLogout = () => {
+    dispatch(logoutUser());
+    navigation("/auth/login");
   };
 
   return (
@@ -41,7 +50,9 @@ const InfoCard = () => {
         <span> Freelancing</span>
       </div>
 
-      <button className="button log-button">Logout</button>
+      <button className="button log-button" onClick={handleLogout}>
+        Logout
+      </button>
     </div>
   );
 };

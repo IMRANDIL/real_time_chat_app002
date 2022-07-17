@@ -5,6 +5,8 @@ import {
   LOGIN_FAIL,
   LOGIN_REQUEST,
   LOGIN_SUCCESS,
+  LOGIN_RESET,
+  SIGNUP_RESET,
 } from "../Constants/AuthConstant";
 
 import axios from "axios";
@@ -73,4 +75,14 @@ export const loginUser = (userData) => async (dispatch) => {
         : error.message,
     });
   }
+};
+
+export const logoutUser = () => (dispatch) => {
+  dispatch({
+    type: LOGIN_RESET,
+  });
+  dispatch({
+    type: SIGNUP_RESET,
+  });
+  localStorage.removeItem("userInfo");
 };
