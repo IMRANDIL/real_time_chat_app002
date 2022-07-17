@@ -40,5 +40,3 @@ export const loginUser = (state = {}, action) => {
       return state;
   }
 };
-
-export const logoutUser = (state = {}, action) => {};
