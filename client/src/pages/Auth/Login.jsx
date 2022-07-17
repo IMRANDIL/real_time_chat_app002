@@ -14,7 +14,7 @@ function Login() {
   });
   const dispatch = useDispatch();
   const navigation = useNavigate();
-  const { error, success } = useSelector((state) => state.loginUser);
+  const { error, success, loading } = useSelector((state) => state.loginUser);
   const userInfo = localStorage.getItem("userInfo");
 
   const handleInput = (e) => {
@@ -70,8 +70,12 @@ function Login() {
               onChange={handleInput}
             />
           </div>
-          <button type="submit" className="button auth-button">
-            Login
+          <button
+            type="submit"
+            className="button auth-button"
+            disabled={loading}
+          >
+            {loading ? "Loading..." : "Login"}
           </button>
           <div className="confirmbee">
             <span>

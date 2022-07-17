@@ -16,7 +16,9 @@ function Signup() {
     confirmpassword: "",
   });
   const dispatch = useDispatch();
-  const { error, success } = useSelector((state) => state.registerUser);
+  const { error, success, loading } = useSelector(
+    (state) => state.registerUser
+  );
   const userInfo = localStorage.getItem("userInfo");
   const navigation = useNavigate();
   const handleInput = (e) => {
@@ -110,8 +112,12 @@ function Signup() {
               onChange={handleInput}
             />
           </div>
-          <button type="submit" className="button auth-button">
-            Signup
+          <button
+            type="submit"
+            className="button auth-button"
+            disabled={loading}
+          >
+            {loading ? "Loading..." : "Signup"}
           </button>
           <div className="confirmbee">
             <span>
