@@ -4,11 +4,13 @@ import { loginUser, userSignup } from "./Reducers/AuthReducers";
 import { uploadReducer } from "./Reducers/uploadReducers";
 
 import { composeWithDevTools } from "redux-devtools-extension";
+import { postReducer } from "./Reducers/PostReducers";
 
 const rootReducer = combineReducers({
   registerUser: userSignup,
   loginUser: loginUser,
   uploadFile: uploadReducer,
+  userPost: postReducer,
 });
 
 const userInfoFromStorage = localStorage.getItem("userInfo")
