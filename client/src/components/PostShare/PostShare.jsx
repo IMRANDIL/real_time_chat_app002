@@ -15,9 +15,7 @@ const PostShare = () => {
   const handleImage = (e) => {
     if (e.target.files && e.target.files[0]) {
       let img = e.target.files[0];
-      setImage({
-        image: URL.createObjectURL(img),
-      });
+      setImage(img);
     }
   };
 
@@ -60,7 +58,7 @@ const PostShare = () => {
         {image && (
           <div className="previewImg">
             <UilTimes onClick={() => setImage(null)} />
-            <img src={image.image} alt="preview-img" />
+            <img src={URL.createObjectURL(image)} alt="preview-img" />
           </div>
         )}
       </div>
