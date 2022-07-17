@@ -1,6 +1,10 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./Auth.css";
+import { useDispatch, useSelector } from "react-redux";
+import { toast } from "react-toastify";
 import { Link, useNavigate } from "react-router-dom";
+import { loginUser } from "../../Actions/AuthActions";
+import { LOGIN_RESET } from "../../Constants/AuthConstant";
 import Auth from "./Auth";
 
 function Login() {
@@ -8,19 +12,32 @@ function Login() {
     username: "",
     password: "",
   });
-
+  const dispatch = useDispatch();
   const navigation = useNavigate();
+  const { error, success } = useSelector((state) => state.loginUser);
+
   const handleInput = (e) => {
     setData({ ...data, [e.target.name]: e.target.value });
   };
 
+  useEffect(() => {
+    if (success) {
+      setData({
+        username: "",
+        password: "",
+      });
+      navigation("/");
+    } else {
+      toast.error(error);
+      dispatch({
+        type: LOGIN_RESET,
+      });
+    }
+  }, [success, error, navigation, dispatch]);
+
   const handleSubmit = (e) => {
     e.preventDefault();
-    setData({
-      username: "",
-      password: "",
-    });
-    navigation("/");
+    dispatch(loginUser(data));
   };
 
   return (
@@ -35,7 +52,9 @@ function Login() {
               className="infoInput"
               name="username"
               placeholder="User Name"
+              value={data.username}
               required
+              autoFocus
               onChange={handleInput}
             />
           </div>
@@ -44,6 +63,7 @@ function Login() {
               type="password"
               className="infoInput"
               name="password"
+              value={data.password}
               placeholder="Password"
               required
               onChange={handleInput}

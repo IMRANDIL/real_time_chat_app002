@@ -24,6 +24,13 @@ function Signup() {
 
   useEffect(() => {
     if (success) {
+      setData({
+        firstname: "",
+        lastname: "",
+        username: "",
+        password: "",
+        confirmpassword: "",
+      });
       navigation("/");
     } else {
       toast.error(error);
@@ -39,13 +46,6 @@ function Signup() {
       toast.error("Passwords do not match");
     } else {
       dispatch(registerUser(data));
-      setData({
-        firstname: "",
-        lastname: "",
-        username: "",
-        password: "",
-        confirmpassword: "",
-      });
     }
   };
 
@@ -62,6 +62,8 @@ function Signup() {
               placeholder="First Name"
               className="infoInput"
               name="firstname"
+              autoFocus
+              value={data.firstname}
               required
               onChange={handleInput}
             />
@@ -70,6 +72,7 @@ function Signup() {
               type="text"
               placeholder="Last Name"
               className="infoInput"
+              value={data.lastname}
               name="lastname"
               required
               onChange={handleInput}
@@ -80,6 +83,7 @@ function Signup() {
               type="email"
               className="infoInput"
               name="username"
+              value={data.username}
               placeholder="User Name"
               required
               onChange={handleInput}
@@ -90,6 +94,7 @@ function Signup() {
               type="password"
               className="infoInput"
               name="password"
+              value={data.password}
               placeholder="Password"
               required
               onChange={handleInput}
@@ -98,6 +103,7 @@ function Signup() {
               type="password"
               className="infoInput"
               name="confirmpassword"
+              value={data.confirmpassword}
               placeholder="Confirm Password"
               required
               onChange={handleInput}
