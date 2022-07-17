@@ -9,14 +9,14 @@ export const postReducer = (state = {}, action) => {
     case POST_REQUEST:
       return {
         ...state,
-        isLoading: true,
+        loading: true,
       };
     case POST_SUCCESS:
       return {
         ...state,
         loading: false,
         success: true,
-        data: action.payload,
+        postData: action.payload,
       };
     case POST_FAILURE:
       return {
