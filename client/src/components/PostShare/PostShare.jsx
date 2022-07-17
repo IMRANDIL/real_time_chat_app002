@@ -1,7 +1,7 @@
 import React, { useState, useRef } from "react";
 import "./PostShare.css";
 import ProfileImg from "../../img/profileImg.jpg";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { UilScenery } from "@iconscout/react-unicons";
 import { UilPlayCircle } from "@iconscout/react-unicons";
 import { UilLocationPoint } from "@iconscout/react-unicons";
@@ -10,6 +10,7 @@ import { UilTimes } from "@iconscout/react-unicons";
 
 const PostShare = () => {
   const [image, setImage] = useState(null);
+  const dispatch = useDispatch();
   const { userInfo } = useSelector((state) => state.registerUser);
   const imageRef = useRef();
   const desc = useRef();
