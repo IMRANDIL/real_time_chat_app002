@@ -13,6 +13,7 @@ app.use(express.urlencoded({ extended: false }));
 app.use("/auth", require("./routes/AuthRoute"));
 app.use("/user", require("./routes/UserRoute"));
 app.use("/post", require("./routes/PostRoute"));
+app.use("/upload", require("./routes/UploadRoute"));
 app.use("/chat", require("./routes/ChatRoute"));
 app.use("/message", require("./routes/MessageRoute"));
 
