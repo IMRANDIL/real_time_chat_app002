@@ -25,7 +25,7 @@ export const uploadImage = (uploadData) => async (dispatch) => {
     console.log(error);
     dispatch({
       type: UPLOAD_FAIL,
-      payload: error.response?.data.message
+      payload: error.response?.data?.message
         ? error.response.data.message
         : error.response?.data
         ? error.response.data
