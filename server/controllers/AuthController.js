@@ -1,6 +1,6 @@
 const User = require("../models/UserModel");
 const bcrypt = require("bcryptjs");
-const generateJwt = require("../Utils/generateJwt");
+const { generateJwt } = require("../Utils/generateJwt");
 
 exports.registerUser = async (req, res) => {
   const { username, password, firstname, lastname } = req.body;
