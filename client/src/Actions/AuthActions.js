@@ -22,14 +22,13 @@ export const registerUser = (userData) => async (dispatch) => {
     };
 
     const { data } = await axios.post("/auth/register", userData, config);
-    console.log(data);
+
     dispatch({
       type: SIGNUP_SUCCESS,
       payload: data,
     });
     localStorage.setItem("userInfo", JSON.stringify(data));
   } catch (error) {
-    console.log(error);
     dispatch({
       type: SIGNUP_FAIL,
       payload: error.response?.data.message

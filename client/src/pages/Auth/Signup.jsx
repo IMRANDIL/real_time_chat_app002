@@ -17,13 +17,14 @@ function Signup() {
   });
   const dispatch = useDispatch();
   const { error, success } = useSelector((state) => state.registerUser);
+  const userInfo = localStorage.getItem("userInfo");
   const navigation = useNavigate();
   const handleInput = (e) => {
     setData({ ...data, [e.target.name]: e.target.value });
   };
 
   useEffect(() => {
-    if (success) {
+    if (success || userInfo) {
       setData({
         firstname: "",
         lastname: "",
@@ -38,7 +39,7 @@ function Signup() {
         type: SIGNUP_RESET,
       });
     }
-  }, [success, navigation, dispatch, error]);
+  }, [success, navigation, dispatch, error, userInfo]);
 
   const handleSubmit = (e) => {
     e.preventDefault();

@@ -15,13 +15,14 @@ function Login() {
   const dispatch = useDispatch();
   const navigation = useNavigate();
   const { error, success } = useSelector((state) => state.loginUser);
+  const userInfo = localStorage.getItem("userInfo");
 
   const handleInput = (e) => {
     setData({ ...data, [e.target.name]: e.target.value });
   };
 
   useEffect(() => {
-    if (success) {
+    if (success || userInfo) {
       setData({
         username: "",
         password: "",
@@ -33,7 +34,7 @@ function Login() {
         type: LOGIN_RESET,
       });
     }
-  }, [success, error, navigation, dispatch]);
+  }, [success, error, navigation, dispatch, userInfo]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
