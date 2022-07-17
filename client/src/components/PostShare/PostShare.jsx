@@ -1,10 +1,11 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import "./PostShare.css";
 import ProfileImg from "../../img/profileImg.jpg";
 import { useSelector, useDispatch } from "react-redux";
 import { UilScenery } from "@iconscout/react-unicons";
 import { UilPlayCircle } from "@iconscout/react-unicons";
 import { UilLocationPoint } from "@iconscout/react-unicons";
+import { postAction } from "../../Actions/PostActions";
 import { UilSchedule } from "@iconscout/react-unicons";
 import { UilTimes } from "@iconscout/react-unicons";
 import { uploadImage } from "../../Actions/uploadActons";
@@ -38,7 +39,11 @@ const PostShare = () => {
       console.log(newPost);
       dispatch(uploadImage(data));
     }
+
+    dispatch(postAction(newPost));
   };
+
+  useEffect(() => {}, []);
 
   return (
     <div className="postShare">

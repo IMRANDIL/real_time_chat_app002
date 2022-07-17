@@ -15,6 +15,7 @@ export const postReducer = (state = {}, action) => {
       return {
         ...state,
         loading: false,
+        success: true,
         data: action.payload,
       };
     case POST_FAILURE:

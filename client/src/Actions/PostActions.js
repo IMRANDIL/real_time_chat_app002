@@ -3,6 +3,7 @@ import {
   POST_REQUEST,
   POST_SUCCESS,
 } from "../Constants/PostConstant";
+import axios from "axios";
 
 export const postAction = (postData) => async (dispatch) => {
   try {
