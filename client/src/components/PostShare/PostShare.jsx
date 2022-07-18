@@ -6,6 +6,7 @@ import { toast } from "react-toastify";
 import { UilScenery } from "@iconscout/react-unicons";
 import { UilPlayCircle } from "@iconscout/react-unicons";
 import { UilLocationPoint } from "@iconscout/react-unicons";
+import { getTimelinePosts } from "../../Actions/PostActions";
 import { postAction } from "../../Actions/PostActions";
 import { UilSchedule } from "@iconscout/react-unicons";
 import { UilTimes } from "@iconscout/react-unicons";
@@ -60,8 +61,9 @@ const PostShare = () => {
     if (postSuccess) {
       setImage(null);
       desc.current.value = "";
+      dispatch(getTimelinePosts(userInfo._id));
     }
-  }, [postError, uploadError, postSuccess, dispatch]);
+  }, [postError, uploadError, postSuccess, dispatch, userInfo]);
 
   return (
     <div className="postShare">
