@@ -5,6 +5,9 @@ import {
   TIMELINE_POST_FAILURE,
   TIMELINE_POST_REQUEST,
   TIMELINE_POST_SUCCESS,
+  LIKE_POST_FAILURE,
+  LIKE_POST_REQUEST,
+  LIKE_POST_SUCCESS,
 } from "../Constants/PostConstant";
 import axios from "axios";
 
@@ -52,6 +55,33 @@ export const getTimelinePosts = (userId) => async (dispatch) => {
   } catch (error) {
     dispatch({
       type: TIMELINE_POST_FAILURE,
+      payload: error.response?.data.message
+        ? error.response.data.message
+        : error.response?.data
+        ? error.response.data
+        : error.message,
+    });
+  }
+};
+
+export const likePost = (postId, userId) => async (dispatch) => {
+  try {
+    dispatch({ type: LIKE_POST_REQUEST });
+    const config = {
+      headers: {
+        "Content-Type": "application/json",
+      },
+    };
+
+    await axios.put(
+      `http://localhost:5000/post/${postId}/react`,
+      { userId },
+      config
+    );
+    dispatch({ type: LIKE_POST_SUCCESS });
+  } catch (error) {
+    dispatch({
+      type: LIKE_POST_FAILURE,
       payload: error.response?.data.message
         ? error.response.data.message
         : error.response?.data
