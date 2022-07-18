@@ -7,6 +7,9 @@ import {
   TIMELINE_POST_REQUEST,
   TIMELINE_POST_SUCCESS,
   TIMELINE_POST_RESET,
+  LIKE_POST_FAILURE,
+  LIKE_POST_REQUEST,
+  LIKE_POST_SUCCESS,
 } from "../Constants/PostConstant";
 
 export const postReducer = (state = {}, action) => {
@@ -53,6 +56,30 @@ export const timelineReducer = (state = {}, action) => {
     case TIMELINE_POST_RESET:
       return {};
     case TIMELINE_POST_FAILURE:
+      return {
+        ...state,
+        loading: false,
+        error: action.payload,
+      };
+    default:
+      return state;
+  }
+};
+
+export const likeReducer = (state = {}, action) => {
+  switch (action.type) {
+    case LIKE_POST_REQUEST:
+      return {
+        ...state,
+        loading: true,
+      };
+    case LIKE_POST_SUCCESS:
+      return {
+        ...state,
+        loading: false,
+        success: true,
+      };
+    case LIKE_POST_FAILURE:
       return {
         ...state,
         loading: false,

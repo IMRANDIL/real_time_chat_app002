@@ -4,7 +4,11 @@ import { loginUser, userSignup } from "./Reducers/AuthReducers";
 import { uploadReducer } from "./Reducers/uploadReducers";
 
 import { composeWithDevTools } from "redux-devtools-extension";
-import { postReducer, timelineReducer } from "./Reducers/PostReducers";
+import {
+  likeReducer,
+  postReducer,
+  timelineReducer,
+} from "./Reducers/PostReducers";
 
 const rootReducer = combineReducers({
   registerUser: userSignup,
@@ -12,6 +16,7 @@ const rootReducer = combineReducers({
   uploadFile: uploadReducer,
   userPost: postReducer,
   timelinePost: timelineReducer,
+  likePost: likeReducer,
 });
 
 const userInfoFromStorage = localStorage.getItem("userInfo")
