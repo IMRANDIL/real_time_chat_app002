@@ -1,19 +1,21 @@
 import React, { useState } from "react";
 import "./Post.css";
 import Comment from "../../img/comment.png";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import Share from "../../img/share.png";
 import Heart from "../../img/like.png";
 import NotLike from "../../img/notlike.png";
 import NoImg from "../../img/noImg.png";
+import { likePost } from "../../Actions/PostActions";
 
 const Post = ({ post }) => {
   const { userInfo } = useSelector((state) => state.registerUser);
   const [like, setLike] = useState(post.likes.includes(userInfo._id));
   const [numLike, setNumLike] = useState(post.likes.length);
-
+  const dispatch = useDispatch();
   const handleLike = () => {
     setLike((prev) => !prev);
+    dispatch(likePost(post._id, userInfo._id));
     numLike ? setNumLike((prev) => prev - 1) : setNumLike((prev) => prev + 1);
   };
 
