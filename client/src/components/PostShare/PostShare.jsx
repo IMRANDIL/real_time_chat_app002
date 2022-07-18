@@ -12,12 +12,15 @@ import { UilSchedule } from "@iconscout/react-unicons";
 import { UilTimes } from "@iconscout/react-unicons";
 import { uploadImage } from "../../Actions/uploadActons";
 import { POST_RESET } from "../../Constants/PostConstant";
+import { UPLOAD_RESET } from "../../Constants/UploadContant";
 
 const PostShare = () => {
   const [image, setImage] = useState(null);
   const dispatch = useDispatch();
   const { userInfo } = useSelector((state) => state.registerUser);
-  const { error: uploadError } = useSelector((state) => state.uploadFile);
+  const { error: uploadError } = useSelector(
+    (state) => state.uploadFile
+  );
   const {
     error: postError,
     loading: loadingPost,
@@ -31,15 +34,16 @@ const PostShare = () => {
       setImage(img);
     }
   };
-
+  let newPost;
   const handleShare = (e) => {
     e.preventDefault();
-    const newPost = {
+    newPost = {
       userId: userInfo._id,
       description: desc.current.value,
     };
 
     if (image) {
+      console.log(image.name);
       const data = new FormData();
       const filename = Date.now() + "-" + image.name;
       data.append("name", filename);
@@ -48,22 +52,43 @@ const PostShare = () => {
       console.log(newPost);
       dispatch(uploadImage(data));
     }
-
     dispatch(postAction(newPost));
+    
+   
   };
 
+
+
+
+
+
   useEffect(() => {
-    if (postError || uploadError) {
-      toast.error(postError || uploadError);
-      dispatch({ type: POST_RESET });
+    if (postError) {
+      toast.error(postError);
+      dispatch({
+        type: POST_RESET,
+      });
     }
+
+ 
+
+    if (uploadError) {
+      toast.error(uploadError);
+    }
+
 
     if (postSuccess) {
       setImage(null);
       desc.current.value = "";
       dispatch(getTimelinePosts(userInfo._id));
+      dispatch({
+        type:UPLOAD_RESET
+      });
+      dispatch({
+        type: POST_RESET,
+      });
     }
-  }, [postError, uploadError, postSuccess, dispatch, userInfo]);
+  }, [postError, uploadError, postSuccess, dispatch, userInfo,]);
 
   return (
     <div className="postShare">
