@@ -8,7 +8,11 @@ import NotLike from "../../img/notlike.png";
 const Post = ({ post }) => {
   return (
     <div className="post">
-      <img src={post.image} alt="post-img" draggable="false" />
+      <img
+        src={post.image && process.env.REACT_APP_PUBLIC_FOLDER + post.image}
+        alt="post-img"
+        draggable="false"
+      />
       <div className="postReact">
         <img src={post.liked ? Heart : NotLike} alt="like-unlike-img" />
         <img src={Comment} alt="comment-img" draggable="false" />

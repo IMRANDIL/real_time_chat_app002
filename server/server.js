@@ -4,6 +4,11 @@ const express = require("express");
 const cors = require("cors");
 const mongoose = require("mongoose");
 const app = express();
+//serve images statically...
+
+app.use(express.static("public"));
+app.use("images", express.static("images"));
+
 //some middlewares...
 app.use(cors());
 app.use(express.json());
