@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import "./ProfileCard.css";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
@@ -6,7 +6,7 @@ import NoImg from "../../img/noback.jpeg";
 import noProfileImg from "../../img/noProfile.jpg";
 
 const ProfileCard = () => {
-  const [ProfilePage, setProfilePage] = useState(false);
+  const ProfilePage = false;
   const { userInfo } = useSelector((state) => state.registerUser);
   const serverPublicFolder = process.env.REACT_APP_PUBLIC_FOLDER;
   return (
@@ -70,8 +70,8 @@ const ProfileCard = () => {
       ) : (
         <span>
           <Link
-            to={ProfilePage ? "/profile" : "/"}
-            onClick={() => setProfilePage(true)}
+            to={`/profile/${userInfo._id}`}
+            style={{ textDecoration: "none", color: "inherit" }}
           >
             My Profile
           </Link>

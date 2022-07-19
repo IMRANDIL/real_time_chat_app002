@@ -20,7 +20,7 @@ function App() {
             <Route path="/" element={userInfo ? <Home /> : <Signup />} />
 
             <Route
-              path="/profile"
+              path="/profile/:id"
               element={userInfo ? <Profile /> : <Signup />}
             />
 

@@ -1,12 +1,16 @@
 import React from "react";
 import "./LogoSearch.css";
+import { Link } from "react-router-dom";
 import Logo from "../../img/logo.png";
 import { UilSearch } from "@iconscout/react-unicons";
 
 const LogoSearch = () => {
   return (
     <div className="logoSearch">
-      <img src={Logo} alt="logo-img" draggable="false" />
+      <Link to="/">
+        <img src={Logo} alt="logo-img" draggable="false" />
+      </Link>
+
       <div className="Search">
         <input type="text" placeholder="#Explore" />
         <div className="s-icon">
