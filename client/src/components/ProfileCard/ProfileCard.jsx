@@ -1,11 +1,12 @@
-import React from "react";
+import React, { useState } from "react";
 import "./ProfileCard.css";
 import { useSelector } from "react-redux";
+import { Link } from "react-router-dom";
 import NoImg from "../../img/noback.jpeg";
 import noProfileImg from "../../img/noProfile.jpg";
 
 const ProfileCard = () => {
-  const ProfilePage = false;
+  const [ProfilePage, setProfilePage] = useState(false);
   const { userInfo } = useSelector((state) => state.registerUser);
   const serverPublicFolder = process.env.REACT_APP_PUBLIC_FOLDER;
   return (
@@ -64,7 +65,18 @@ const ProfileCard = () => {
         </div>
         <hr />
       </div>
-      {ProfilePage ? "" : <span>My Profile</span>}
+      {ProfilePage ? (
+        ""
+      ) : (
+        <span>
+          <Link
+            to={ProfilePage ? "/profile" : "/"}
+            onClick={() => setProfilePage(true)}
+          >
+            My Profile
+          </Link>
+        </span>
+      )}
     </div>
   );
 };
