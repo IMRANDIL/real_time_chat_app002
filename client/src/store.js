@@ -9,6 +9,7 @@ import {
   postReducer,
   timelineReducer,
 } from "./Reducers/PostReducers";
+import { getUser } from "./Reducers/userReducers";
 
 const rootReducer = combineReducers({
   registerUser: userSignup,
@@ -17,6 +18,7 @@ const rootReducer = combineReducers({
   userPost: postReducer,
   timelinePost: timelineReducer,
   likePost: likeReducer,
+  getUser: getUser,
 });
 
 const userInfoFromStorage = localStorage.getItem("userInfo")
