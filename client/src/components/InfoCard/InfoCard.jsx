@@ -2,13 +2,13 @@ import React, { useState, useEffect } from "react";
 import "./InfoCard.css";
 import { useNavigate, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
+import { getUser } from "../../Actions/UserActions";
 import { UilPen } from "@iconscout/react-unicons";
 import ProfileModel from "../ProfileModel/ProfileModel";
 import { logoutUser } from "../../Actions/AuthActions";
 
 const InfoCard = () => {
   const [modalOpen, setModalOpen] = useState(false);
-  const [profileUser, setProfileUser] = useState({});
   const { id } = useParams();
   const { userInfo } = useSelector((state) => state.registerUser);
   const navigation = useNavigate();
@@ -22,7 +22,9 @@ const InfoCard = () => {
     navigation("/auth/login");
   };
 
-  useEffect(() => {}, []);
+  useEffect(() => {
+    dispatch(getUser(id));
+  }, [dispatch, id]);
 
   return (
     <div className="infoCard">
