@@ -7,6 +7,7 @@ import noProfileImg from "../../img/noProfile.jpg";
 
 const ProfileCard = ({ location }) => {
   const { userInfo } = useSelector((state) => state.registerUser);
+  const { timelinePost } = useSelector((state) => state.timelinePost);
   const serverPublicFolder = process.env.REACT_APP_PUBLIC_FOLDER;
   return (
     <div className="profileCard">
@@ -56,7 +57,12 @@ const ProfileCard = ({ location }) => {
               <div className="vl"></div>
 
               <div className="follow">
-                <span>3</span>
+                <span>
+                  {timelinePost &&
+                    timelinePost.filter(
+                      (timelinePost) => timelinePost.userId === userInfo._id
+                    ).length}
+                </span>
                 <span>Posts</span>
               </div>
             </>
