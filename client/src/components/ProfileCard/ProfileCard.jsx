@@ -35,7 +35,8 @@ const ProfileCard = ({ location }) => {
 
       <div className="profileName">
         <span>
-          {userInfo.firstname} {userInfo.lastname}
+          {user && user.firstname ? user.firstname : userInfo.firstname}{" "}
+          {user && user.lastname ? user.lastname : userInfo.lastname}
         </span>
         <span>
           {user && user.worksAt ? user && user.worksAt : "Not updated"}
@@ -46,13 +47,21 @@ const ProfileCard = ({ location }) => {
         <hr />
         <div>
           <div className="follow">
-            <span>{userInfo.following.length}</span>
+            <span>
+              {user && user.following.length
+                ? user.following.length
+                : userInfo.following.length}
+            </span>
             <span>Following</span>
           </div>
           <div className="vl"></div>
 
           <div className="follow">
-            <span>{userInfo.followers.length}</span>
+            <span>
+              {user && user.followers.length
+                ? user.followers.length
+                : userInfo.followers.length}
+            </span>
             <span>Follower</span>
           </div>
           {location === "profilePage" && (
@@ -63,7 +72,7 @@ const ProfileCard = ({ location }) => {
                 <span>
                   {timelinePost &&
                     timelinePost.filter(
-                      (timelinePost) => timelinePost.userId === userInfo._id
+                      (timelinePost) => timelinePost.userId === user._id
                     ).length}
                 </span>
                 <span>Posts</span>

@@ -29,7 +29,7 @@ const InfoCard = () => {
   return (
     <div className="infoCard">
       <div className="infoHead">
-        <h4>Your Info</h4>
+        <h4>Profile Info</h4>
         <div>
           <UilPen width="2rem" height="1.2rem" onClick={handleModal} />
           <ProfileModel modalOpen={modalOpen} setModalOpen={setModalOpen} />

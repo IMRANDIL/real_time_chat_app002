@@ -8,20 +8,21 @@ import Post from "../Post/Post";
 
 const Posts = () => {
   const dispatch = useDispatch();
-  const { userInfo } = useSelector((state) => state.registerUser);
+  // const { userInfo } = useSelector((state) => state.registerUser);
+  const { user } = useSelector((state) => state.getUser);
   const { timelinePost, loading, error } = useSelector(
     (state) => state.timelinePost
   );
 
   useEffect(() => {
-    if (userInfo) {
-      dispatch(getTimelinePosts(userInfo._id));
+    if (user) {
+      dispatch(getTimelinePosts(user._id));
     }
 
     if (error) {
       toast.error(error);
     }
-  }, [dispatch, userInfo, error]);
+  }, [dispatch, user, error]);
   return (
     <div className="posts">
       {loading && <h2 style={{ textAlign: "center" }}>Loading...</h2>}

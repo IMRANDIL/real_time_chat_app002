@@ -2,7 +2,7 @@ import {
   USER_GET_FAILURE,
   USER_GET_REQUEST,
   USER_GET_SUCCESS,
-  USER_GET_RESET,
+  //   USER_GET_RESET,
 } from "../Constants/userConstants";
 import axios from "axios";
 
