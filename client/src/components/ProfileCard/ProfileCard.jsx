@@ -2,7 +2,7 @@ import React from "react";
 import "./ProfileCard.css";
 import { useSelector } from "react-redux";
 import NoImg from "../../img/noImg.png";
-import ProfileImg from "../../img/profileImg.jpg";
+import noProfileImg from "../../img/noProfile.jpg";
 
 const ProfileCard = () => {
   const ProfilePage = false;
@@ -20,7 +20,15 @@ const ProfileCard = () => {
           alt="cover-img"
           draggable="false"
         />
-        <img src={ProfileImg} alt="profile-img" draggable="false" />
+        <img
+          src={
+            userInfo.profilePicture
+              ? serverPublicFolder + userInfo.profilePicture
+              : noProfileImg
+          }
+          alt="profile-img"
+          draggable="false"
+        />
       </div>
 
       <div className="profileName">
