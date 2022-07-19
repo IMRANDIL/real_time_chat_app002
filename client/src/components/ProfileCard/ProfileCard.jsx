@@ -5,8 +5,7 @@ import { Link } from "react-router-dom";
 import NoImg from "../../img/noback.jpeg";
 import noProfileImg from "../../img/noProfile.jpg";
 
-const ProfileCard = () => {
-  const ProfilePage = false;
+const ProfileCard = ({ location }) => {
   const { userInfo } = useSelector((state) => state.registerUser);
   const serverPublicFolder = process.env.REACT_APP_PUBLIC_FOLDER;
   return (
@@ -52,7 +51,7 @@ const ProfileCard = () => {
             <span>{userInfo.followers.length}</span>
             <span>Follower</span>
           </div>
-          {ProfilePage && (
+          {location === "profilePage" && (
             <>
               <div className="vl"></div>
 
@@ -65,7 +64,7 @@ const ProfileCard = () => {
         </div>
         <hr />
       </div>
-      {ProfilePage ? (
+      {location === "profilePage" ? (
         ""
       ) : (
         <span>
