@@ -1,11 +1,12 @@
 import React from "react";
 import "./ProfileCard.css";
+import { useSelector } from "react-redux";
 import CoverImg from "../../img/cover.jpg";
 import ProfileImg from "../../img/profileImg.jpg";
 
 const ProfileCard = () => {
-  const ProfilePage = true;
-
+  const ProfilePage = false;
+  const { userInfo } = useSelector((state) => state.registerUser);
   return (
     <div className="profileCard">
       <div className="profileImages">
@@ -14,7 +15,9 @@ const ProfileCard = () => {
       </div>
 
       <div className="profileName">
-        <span>Lovely Sharma</span>
+        <span>
+          {userInfo.firstname} {userInfo.lastname}
+        </span>
         <span>Senior UI/UX Designer</span>
       </div>
 
