@@ -1,16 +1,25 @@
 import React from "react";
 import "./ProfileCard.css";
 import { useSelector } from "react-redux";
-import CoverImg from "../../img/cover.jpg";
+import NoImg from "../../img/noImg.png";
 import ProfileImg from "../../img/profileImg.jpg";
 
 const ProfileCard = () => {
   const ProfilePage = false;
   const { userInfo } = useSelector((state) => state.registerUser);
+  const serverPublicFolder = process.env.REACT_APP_PUBLIC_FOLDER;
   return (
     <div className="profileCard">
       <div className="profileImages">
-        <img src={CoverImg} alt="cover-img" draggable="false" />
+        <img
+          src={
+            userInfo.coverPicture
+              ? serverPublicFolder + userInfo.coverPicture
+              : NoImg
+          }
+          alt="cover-img"
+          draggable="false"
+        />
         <img src={ProfileImg} alt="profile-img" draggable="false" />
       </div>
 
