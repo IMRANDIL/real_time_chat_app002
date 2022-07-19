@@ -1,13 +1,16 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./InfoCard.css";
-import { useNavigate } from "react-router-dom";
-import { useDispatch } from "react-redux";
+import { useNavigate, useParams } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
 import { UilPen } from "@iconscout/react-unicons";
 import ProfileModel from "../ProfileModel/ProfileModel";
 import { logoutUser } from "../../Actions/AuthActions";
 
 const InfoCard = () => {
   const [modalOpen, setModalOpen] = useState(false);
+  const [profileUser, setProfileUser] = useState({});
+  const { id } = useParams();
+  const { userInfo } = useSelector((state) => state.registerUser);
   const navigation = useNavigate();
   const dispatch = useDispatch();
   const handleModal = () => {
@@ -18,6 +21,8 @@ const InfoCard = () => {
     dispatch(logoutUser());
     navigation("/auth/login");
   };
+
+  useEffect(() => {}, []);
 
   return (
     <div className="infoCard">
@@ -33,21 +38,24 @@ const InfoCard = () => {
         <span>
           <b>Status:</b>
         </span>
-        <span> Commited</span>
+        <span>
+          {" "}
+          {userInfo.relationship ? userInfo.relationship : "Not updated"}
+        </span>
       </div>
 
       <div className="info">
         <span>
           <b>Lives in:</b>
         </span>
-        <span> Raniganj</span>
+        <span> {userInfo.livesin ? userInfo.livesin : "Not updated"}</span>
       </div>
 
       <div className="info">
         <span>
           <b>Works at:</b>
         </span>
-        <span> Freelancing</span>
+        <span> {userInfo.worksAt ? userInfo.worksAt : "Not updated"}</span>
       </div>
 
       <button className="button log-button" onClick={handleLogout}>

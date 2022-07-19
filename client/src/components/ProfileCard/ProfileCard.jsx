@@ -36,7 +36,7 @@ const ProfileCard = ({ location }) => {
         <span>
           {userInfo.firstname} {userInfo.lastname}
         </span>
-        <span>{userInfo.worksAt ? userInfo.worksAt : "Self Employed"}</span>
+        <span>{userInfo.worksAt ? userInfo.worksAt : "Not updated"}</span>
       </div>
 
       <div className="followStatus">
