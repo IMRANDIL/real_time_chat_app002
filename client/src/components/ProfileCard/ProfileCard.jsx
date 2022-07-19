@@ -1,7 +1,7 @@
 import React from "react";
 import "./ProfileCard.css";
 import { useSelector } from "react-redux";
-import NoImg from "../../img/noImg.png";
+import NoImg from "../../img/noback.jpeg";
 import noProfileImg from "../../img/noProfile.jpg";
 
 const ProfileCard = () => {
