@@ -7,6 +7,7 @@ import noProfileImg from "../../img/noProfile.jpg";
 
 const ProfileCard = ({ location }) => {
   const { userInfo } = useSelector((state) => state.registerUser);
+  const { user } = useSelector((state) => state.getUser);
   const { timelinePost } = useSelector((state) => state.timelinePost);
   const serverPublicFolder = process.env.REACT_APP_PUBLIC_FOLDER;
   return (
@@ -14,8 +15,8 @@ const ProfileCard = ({ location }) => {
       <div className="profileImages">
         <img
           src={
-            userInfo.coverPicture
-              ? serverPublicFolder + userInfo.coverPicture
+            user && user.coverPicture
+              ? serverPublicFolder + user.coverPicture
               : NoImg
           }
           alt="cover-img"
@@ -23,8 +24,8 @@ const ProfileCard = ({ location }) => {
         />
         <img
           src={
-            userInfo.profilePicture
-              ? serverPublicFolder + userInfo.profilePicture
+            user && user.profilePicture
+              ? serverPublicFolder + user.profilePicture
               : noProfileImg
           }
           alt="profile-img"
@@ -36,7 +37,9 @@ const ProfileCard = ({ location }) => {
         <span>
           {userInfo.firstname} {userInfo.lastname}
         </span>
-        <span>{userInfo.worksAt ? userInfo.worksAt : "Not updated"}</span>
+        <span>
+          {user && user.worksAt ? user && user.worksAt : "Not updated"}
+        </span>
       </div>
 
       <div className="followStatus">

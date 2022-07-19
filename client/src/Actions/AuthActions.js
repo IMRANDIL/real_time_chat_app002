@@ -10,6 +10,8 @@ import {
 } from "../Constants/AuthConstant";
 
 import axios from "axios";
+import { USER_GET_RESET } from "../Constants/userConstants";
+import { TIMELINE_POST_RESET } from "../Constants/PostConstant";
 
 export const registerUser = (userData) => async (dispatch) => {
   try {
@@ -91,6 +93,12 @@ export const logoutUser = () => (dispatch) => {
   });
   dispatch({
     type: SIGNUP_RESET,
+  });
+  dispatch({
+    type: USER_GET_RESET,
+  });
+  dispatch({
+    type: TIMELINE_POST_RESET,
   });
   localStorage.removeItem("userInfo");
 };

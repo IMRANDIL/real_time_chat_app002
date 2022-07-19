@@ -10,7 +10,7 @@ import { logoutUser } from "../../Actions/AuthActions";
 const InfoCard = () => {
   const [modalOpen, setModalOpen] = useState(false);
   const { id } = useParams();
-  const { userInfo } = useSelector((state) => state.registerUser);
+  const { user } = useSelector((state) => state.getUser);
   const navigation = useNavigate();
   const dispatch = useDispatch();
   const handleModal = () => {
@@ -42,7 +42,7 @@ const InfoCard = () => {
         </span>
         <span>
           {" "}
-          {userInfo.relationship ? userInfo.relationship : "Not updated"}
+          {user && user.relationship ? user.relationship : "Not updated"}
         </span>
       </div>
 
@@ -50,14 +50,14 @@ const InfoCard = () => {
         <span>
           <b>Lives in:</b>
         </span>
-        <span> {userInfo.livesin ? userInfo.livesin : "Not updated"}</span>
+        <span> {user && user.livesin ? user.livesin : "Not updated"}</span>
       </div>
 
       <div className="info">
         <span>
           <b>Works at:</b>
         </span>
-        <span> {userInfo.worksAt ? userInfo.worksAt : "Not updated"}</span>
+        <span> {user && user.worksAt ? user.worksAt : "Not updated"}</span>
       </div>
 
       <button className="button log-button" onClick={handleLogout}>
