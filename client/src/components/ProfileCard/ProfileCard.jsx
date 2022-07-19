@@ -35,21 +35,21 @@ const ProfileCard = () => {
         <span>
           {userInfo.firstname} {userInfo.lastname}
         </span>
-        <span>Senior UI/UX Designer</span>
+        <span>{userInfo.worksAt ? userInfo.worksAt : "Self Employed"}</span>
       </div>
 
       <div className="followStatus">
         <hr />
         <div>
           <div className="follow">
-            <span>6,999</span>
-            <span>Followings</span>
+            <span>{userInfo.following.length}</span>
+            <span>Following</span>
           </div>
           <div className="vl"></div>
 
           <div className="follow">
-            <span>3</span>
-            <span>Followers</span>
+            <span>{userInfo.followers.length}</span>
+            <span>Follower</span>
           </div>
           {ProfilePage && (
             <>

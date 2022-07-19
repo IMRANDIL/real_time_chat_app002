@@ -1,6 +1,6 @@
 import React, { useState, useRef, useEffect } from "react";
 import "./PostShare.css";
-import ProfileImg from "../../img/profileImg.jpg";
+import noProfileImg from "../../img/noProfile.jpg";
 import { useSelector, useDispatch } from "react-redux";
 import { toast } from "react-toastify";
 import { UilScenery } from "@iconscout/react-unicons";
@@ -16,11 +16,10 @@ import { UPLOAD_RESET } from "../../Constants/UploadContant";
 
 const PostShare = () => {
   const [image, setImage] = useState(null);
+  const serverPublicFolder = process.env.REACT_APP_PUBLIC_FOLDER;
   const dispatch = useDispatch();
   const { userInfo } = useSelector((state) => state.registerUser);
-  const { error: uploadError } = useSelector(
-    (state) => state.uploadFile
-  );
+  const { error: uploadError } = useSelector((state) => state.uploadFile);
   const {
     error: postError,
     loading: loadingPost,
@@ -53,14 +52,7 @@ const PostShare = () => {
       dispatch(uploadImage(data));
     }
     dispatch(postAction(newPost));
-    
-   
   };
-
-
-
-
-
 
   useEffect(() => {
     if (postError) {
@@ -70,29 +62,34 @@ const PostShare = () => {
       });
     }
 
- 
-
     if (uploadError) {
       toast.error(uploadError);
     }
-
 
     if (postSuccess) {
       setImage(null);
       desc.current.value = "";
       dispatch(getTimelinePosts(userInfo._id));
       dispatch({
-        type:UPLOAD_RESET
+        type: UPLOAD_RESET,
       });
       dispatch({
         type: POST_RESET,
       });
     }
-  }, [postError, uploadError, postSuccess, dispatch, userInfo,]);
+  }, [postError, uploadError, postSuccess, dispatch, userInfo]);
 
   return (
     <div className="postShare">
-      <img src={ProfileImg} alt="profile-img" draggable="false" />
+      <img
+        src={
+          userInfo.profilePicture
+            ? serverPublicFolder + userInfo.profilePicture
+            : noProfileImg
+        }
+        alt="profile-img"
+        draggable="false"
+      />
       <div>
         <input
           type="text"
