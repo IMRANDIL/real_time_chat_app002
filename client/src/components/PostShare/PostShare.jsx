@@ -19,6 +19,7 @@ const PostShare = () => {
   const serverPublicFolder = process.env.REACT_APP_PUBLIC_FOLDER;
   const dispatch = useDispatch();
   const { userInfo } = useSelector((state) => state.registerUser);
+  const { user } = useSelector((state) => state.getUser);
   const { error: uploadError } = useSelector((state) => state.uploadFile);
   const {
     error: postError,
@@ -83,8 +84,8 @@ const PostShare = () => {
     <div className="postShare">
       <img
         src={
-          userInfo.profilePicture
-            ? serverPublicFolder + userInfo.profilePicture
+          user && user.profilePicture
+            ? serverPublicFolder + user.profilePicture
             : noProfileImg
         }
         alt="profile-img"

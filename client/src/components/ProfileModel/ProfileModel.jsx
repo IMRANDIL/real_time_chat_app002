@@ -45,7 +45,7 @@ function ProfileModel({ modalOpen, setModalOpen, user }) {
       const data = new FormData();
       const fileName = Date.now() + "-" + coverImage.name;
       data.append("name", fileName);
-      data.append("file", profileImage);
+      data.append("file", coverImage);
       userData.coverPicture = fileName;
       dispatch(uploadImage(data));
     }
