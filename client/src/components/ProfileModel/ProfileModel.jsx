@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 
 import { Modal, useMantineTheme } from "@mantine/core";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { useParams } from "react-router-dom";
 import { updateUser } from "../../Actions/UserActions";
 import { uploadImage } from "../../Actions/uploadActons";
@@ -12,7 +12,7 @@ function ProfileModel({ modalOpen, setModalOpen, user }) {
   const [formData, setFormData] = useState(user);
   const [profileImage, setProfileImage] = useState(null);
   const [coverImage, setCoverImage] = useState(null);
-  const { userInfo } = useSelector((state) => state.registerUser);
+  // const { userInfo } = useSelector((state) => state.registerUser);
   const dispatch = useDispatch();
   const { id } = useParams();
 
@@ -49,6 +49,8 @@ function ProfileModel({ modalOpen, setModalOpen, user }) {
       userData.coverPicture = fileName;
       dispatch(uploadImage(data));
     }
+    dispatch(updateUser(id, userData));
+    setModalOpen(false);
   };
 
   return (
