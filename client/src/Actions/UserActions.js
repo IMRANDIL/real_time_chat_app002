@@ -41,6 +41,7 @@ export const updateUser = (id, userData) => async (dispatch) => {
     );
     dispatch({ type: USER_UPDATE_SUCCESS, payload: data });
     dispatch({ type: USER_GET_SUCCESS, payload: data });
+    localStorage.setItem("user", JSON.stringify(data));
   } catch (error) {
     dispatch({
       type: USER_UPDATE_FAILURE,
