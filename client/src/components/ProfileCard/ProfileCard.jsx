@@ -75,7 +75,7 @@ const ProfileCard = ({ location }) => {
                 <span>
                   {timelinePost &&
                     timelinePost.filter(
-                      (timelinePost) => timelinePost.userId === user._id
+                      (timelinePost) => timelinePost.userId === user?._id
                     ).length}
                 </span>
                 <span>Posts</span>
