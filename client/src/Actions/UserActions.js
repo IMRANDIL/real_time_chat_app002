@@ -2,7 +2,9 @@ import {
   USER_GET_FAILURE,
   USER_GET_REQUEST,
   USER_GET_SUCCESS,
-  //   USER_GET_RESET,
+  USER_UPDATE_FAILURE,
+  USER_UPDATE_REQUEST,
+  USER_UPDATE_SUCCESS,
 } from "../Constants/userConstants";
 import axios from "axios";
 
@@ -24,4 +26,29 @@ export const getUser = (id) => async (dispatch) => {
   }
 };
 
-export const updateUser = (id, user) => async (dispatch) => {};
+export const updateUser = (id, userData) => async (dispatch) => {
+  try {
+    dispatch({ type: USER_UPDATE_REQUEST });
+    const config = {
+      headers: {
+        "Content-Type": "application/json",
+      },
+    };
+    const { data } = await axios.put(
+      `http://localhost:5000/user/${id}`,
+      userData,
+      config
+    );
+    dispatch({ type: USER_UPDATE_SUCCESS, payload: data });
+    dispatch({ type: USER_GET_SUCCESS, payload: data });
+  } catch (error) {
+    dispatch({
+      type: USER_UPDATE_FAILURE,
+      payload: error.response?.data.message
+        ? error.response.data.message
+        : error.response?.data
+        ? error.response.data
+        : error.message,
+    });
+  }
+};
