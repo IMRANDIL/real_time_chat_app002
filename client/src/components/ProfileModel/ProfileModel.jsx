@@ -57,7 +57,7 @@ function ProfileModel({ modalOpen, setModalOpen, user }) {
             type="text"
             className="infoInput"
             placeholder="Lives In"
-            name="livesIn"
+            name="livesin"
           />
           <input
             type="text"
@@ -71,13 +71,14 @@ function ProfileModel({ modalOpen, setModalOpen, user }) {
             type="text"
             className="infoInput"
             placeholder="Relationship Status"
+            name="relationship"
           />
         </div>
         <div>
           Profile Image
-          <input type="file" name="ProfileImg" />
+          <input type="file" name="profilePicture" />
           Cover Image
-          <input type="file" name="CoverImg" />
+          <input type="file" name="coverPicture" />
         </div>
 
         <button className="button log-button">Update</button>
