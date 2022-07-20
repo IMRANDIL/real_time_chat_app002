@@ -3,8 +3,6 @@ import "./Auth.css";
 import { useDispatch, useSelector } from "react-redux";
 import { toast } from "react-toastify";
 import { Link, useNavigate } from "react-router-dom";
-import { getTimelinePosts } from "../../Actions/PostActions";
-import { getUser } from "../../Actions/UserActions";
 import { loginUser } from "../../Actions/AuthActions";
 import { LOGIN_RESET } from "../../Constants/AuthConstant";
 import Auth from "./Auth";
@@ -18,7 +16,6 @@ function Login() {
   const navigation = useNavigate();
   const { error, success, loading } = useSelector((state) => state.loginUser);
   const userInfo = localStorage.getItem("userInfo");
-  const { userInfo: user } = useSelector((state) => state.registerUser);
 
   const handleInput = (e) => {
     setData({ ...data, [e.target.name]: e.target.value });
@@ -26,8 +23,6 @@ function Login() {
 
   useEffect(() => {
     if (success || userInfo) {
-      dispatch(getTimelinePosts(user && user._id));
-      dispatch(getUser(user && user._id));
       setData({
         username: "",
         password: "",
@@ -39,7 +34,7 @@ function Login() {
         type: LOGIN_RESET,
       });
     }
-  }, [success, error, navigation, dispatch, userInfo, user]);
+  }, [success, error, navigation, dispatch, userInfo]);
 
   const handleSubmit = (e) => {
     e.preventDefault();

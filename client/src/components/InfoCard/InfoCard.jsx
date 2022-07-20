@@ -6,11 +6,13 @@ import { getUser } from "../../Actions/UserActions";
 import { UilPen } from "@iconscout/react-unicons";
 import ProfileModel from "../ProfileModel/ProfileModel";
 import { logoutUser } from "../../Actions/AuthActions";
+import { getTimelinePosts } from "../../Actions/PostActions";
 
 const InfoCard = () => {
   const [modalOpen, setModalOpen] = useState(false);
   const { id } = useParams();
   const { user } = useSelector((state) => state.getUser);
+  const { userInfo } = useSelector((state) => state.registerUser);
   const navigation = useNavigate();
   const dispatch = useDispatch();
   const handleModal = () => {
@@ -24,16 +26,21 @@ const InfoCard = () => {
 
   useEffect(() => {
     dispatch(getUser(id));
+    dispatch(getTimelinePosts(id));
   }, [dispatch, id]);
 
   return (
     <div className="infoCard">
       <div className="infoHead">
         <h4>Profile Info</h4>
-        <div>
-          <UilPen width="2rem" height="1.2rem" onClick={handleModal} />
-          <ProfileModel modalOpen={modalOpen} setModalOpen={setModalOpen} />
-        </div>
+        {user && user._id === userInfo._id ? (
+          <div>
+            <UilPen width="2rem" height="1.2rem" onClick={handleModal} />
+            <ProfileModel modalOpen={modalOpen} setModalOpen={setModalOpen} />
+          </div>
+        ) : (
+          ""
+        )}
       </div>
 
       <div className="info">

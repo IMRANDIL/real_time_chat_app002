@@ -25,8 +25,13 @@ const userInfoFromStorage = localStorage.getItem("userInfo")
   ? JSON.parse(localStorage.getItem("userInfo"))
   : null;
 
+const userFromStorage = localStorage.getItem("user")
+  ? JSON.parse(localStorage.getItem("user"))
+  : {};
+
 const initialState = {
   registerUser: { userInfo: userInfoFromStorage },
+  getUser: { user: userFromStorage },
 };
 
 export const store = createStore(

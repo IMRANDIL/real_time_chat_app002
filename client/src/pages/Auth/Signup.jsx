@@ -3,8 +3,6 @@ import "./Auth.css";
 import { useDispatch, useSelector } from "react-redux";
 import { registerUser } from "../../Actions/AuthActions";
 import { toast } from "react-toastify";
-import { getUser } from "../../Actions/UserActions";
-import { getTimelinePosts } from "../../Actions/PostActions";
 import { Link, useNavigate } from "react-router-dom";
 import { SIGNUP_RESET } from "../../Constants/AuthConstant";
 import Auth from "./Auth";
@@ -18,12 +16,9 @@ function Signup() {
     confirmpassword: "",
   });
   const dispatch = useDispatch();
-  const {
-    error,
-    success,
-    loading,
-    userInfo: user,
-  } = useSelector((state) => state.registerUser);
+  const { error, success, loading } = useSelector(
+    (state) => state.registerUser
+  );
   const userInfo = localStorage.getItem("userInfo");
   const navigation = useNavigate();
   const handleInput = (e) => {
@@ -32,8 +27,6 @@ function Signup() {
 
   useEffect(() => {
     if (success || userInfo) {
-      dispatch(getTimelinePosts(user && user._id));
-      dispatch(getUser(user && user._id));
       setData({
         firstname: "",
         lastname: "",
@@ -48,7 +41,7 @@ function Signup() {
         type: SIGNUP_RESET,
       });
     }
-  }, [success, navigation, dispatch, error, userInfo, user]);
+  }, [success, navigation, dispatch, error, userInfo]);
 
   const handleSubmit = (e) => {
     e.preventDefault();

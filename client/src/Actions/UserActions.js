@@ -11,6 +11,7 @@ export const getUser = (id) => async (dispatch) => {
     dispatch({ type: USER_GET_REQUEST });
     const { data } = await axios.get(`http://localhost:5000/user/${id}`);
     dispatch({ type: USER_GET_SUCCESS, payload: data });
+    localStorage.setItem("user", JSON.stringify(data));
   } catch (error) {
     dispatch({
       type: USER_GET_FAILURE,

@@ -1,15 +1,32 @@
-import React from "react";
+import React, { useEffect } from "react";
 import "./ProfileCard.css";
-import { useSelector } from "react-redux";
+import { toast } from "react-toastify";
+import { useSelector, useDispatch } from "react-redux";
+// import { getUser } from "../../Actions/UserActions";
+// import { getTimelinePosts } from "../../Actions/PostActions";
 import { Link } from "react-router-dom";
 import NoImg from "../../img/noback.jpeg";
 import noProfileImg from "../../img/noProfile.jpg";
+import { USER_GET_RESET } from "../../Constants/userConstants";
+import { getTimelinePosts } from "../../Actions/PostActions";
+import { getUser } from "../../Actions/UserActions";
 
 const ProfileCard = ({ location }) => {
-  const { userInfo } = useSelector((state) => state.registerUser);
-  const { user } = useSelector((state) => state.getUser);
+  // const { userInfo } = useSelector((state) => state.registerUser);
+  const { user, error } = useSelector((state) => state.getUser);
   const { timelinePost } = useSelector((state) => state.timelinePost);
   const serverPublicFolder = process.env.REACT_APP_PUBLIC_FOLDER;
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    if (error) {
+      toast.error(error);
+      dispatch({
+        type: USER_GET_RESET,
+      });
+    }
+  }, [error, dispatch]);
+
   return (
     <div className="profileCard">
       <div className="profileImages">
@@ -35,8 +52,7 @@ const ProfileCard = ({ location }) => {
 
       <div className="profileName">
         <span>
-          {user && user.firstname ? user.firstname : userInfo.firstname}{" "}
-          {user && user.lastname ? user.lastname : userInfo.lastname}
+          {user && user.firstname} {user && user.lastname}
         </span>
         <span>
           {user && user.worksAt ? user && user.worksAt : "Not updated"}
@@ -47,21 +63,13 @@ const ProfileCard = ({ location }) => {
         <hr />
         <div>
           <div className="follow">
-            <span>
-              {user && user.following.length
-                ? user.following.length
-                : userInfo.following.length}
-            </span>
+            <span>{user && user.following.length}</span>
             <span>Following</span>
           </div>
           <div className="vl"></div>
 
           <div className="follow">
-            <span>
-              {user && user.followers.length
-                ? user.followers.length
-                : userInfo.followers.length}
-            </span>
+            <span>{user && user.followers.length}</span>
             <span>Follower</span>
           </div>
           {location === "profilePage" && (
@@ -70,11 +78,10 @@ const ProfileCard = ({ location }) => {
 
               <div className="follow">
                 <span>
-                  {(timelinePost &&
+                  {timelinePost &&
                     timelinePost.filter(
                       (timelinePost) => timelinePost.userId === user._id
-                    ).length) ||
-                    0}
+                    ).length}
                 </span>
                 <span>Posts</span>
               </div>
@@ -88,8 +95,9 @@ const ProfileCard = ({ location }) => {
       ) : (
         <span>
           <Link
-            to={`/profile/${userInfo._id}`}
+            to={`/profile/${user && user._id}`}
             style={{ textDecoration: "none", color: "inherit" }}
+            // onClick={handleTimeline}
           >
             My Profile
           </Link>
