@@ -23,3 +23,5 @@ export const getUser = (id) => async (dispatch) => {
     });
   }
 };
+
+export const updateUser = (id, user) => async (dispatch) => {};
