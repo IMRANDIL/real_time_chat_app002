@@ -2,17 +2,12 @@ import React, { useEffect } from "react";
 import "./ProfileCard.css";
 import { toast } from "react-toastify";
 import { useSelector, useDispatch } from "react-redux";
-// import { getUser } from "../../Actions/UserActions";
-// import { getTimelinePosts } from "../../Actions/PostActions";
 import { Link } from "react-router-dom";
 import NoImg from "../../img/noback.jpeg";
 import noProfileImg from "../../img/noProfile.jpg";
 import { USER_GET_RESET } from "../../Constants/userConstants";
-import { getTimelinePosts } from "../../Actions/PostActions";
-import { getUser } from "../../Actions/UserActions";
 
 const ProfileCard = ({ location }) => {
-  // const { userInfo } = useSelector((state) => state.registerUser);
   const { user, error } = useSelector((state) => state.getUser);
   const { timelinePost } = useSelector((state) => state.timelinePost);
   const serverPublicFolder = process.env.REACT_APP_PUBLIC_FOLDER;
