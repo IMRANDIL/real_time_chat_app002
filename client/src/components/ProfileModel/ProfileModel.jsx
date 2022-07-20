@@ -1,9 +1,18 @@
-import React from "react";
+import React, { useState } from "react";
 
 import { Modal, useMantineTheme } from "@mantine/core";
+import { useDispatch, useSelector } from "react-redux";
+import { useParams } from "react-router-dom";
 
-function ProfileModel({ modalOpen, setModalOpen }) {
+function ProfileModel({ modalOpen, setModalOpen, user }) {
   const theme = useMantineTheme();
+
+  const [formData, setFormData] = useState(user);
+  const [profileImage, setProfileImage] = useState(null);
+  const [coverImage, setCoverImage] = useState(null);
+  const { userInfo } = useSelector((state) => state.registerUser);
+  const dispatch = useDispatch();
+  const { id } = useParams();
 
   return (
     <Modal

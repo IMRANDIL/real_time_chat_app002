@@ -36,7 +36,11 @@ const InfoCard = () => {
         {user && user._id === userInfo._id ? (
           <div>
             <UilPen width="2rem" height="1.2rem" onClick={handleModal} />
-            <ProfileModel modalOpen={modalOpen} setModalOpen={setModalOpen} />
+            <ProfileModel
+              modalOpen={modalOpen}
+              setModalOpen={setModalOpen}
+              user={user}
+            />
           </div>
         ) : (
           ""
