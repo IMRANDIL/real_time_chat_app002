@@ -70,10 +70,11 @@ const ProfileCard = ({ location }) => {
 
               <div className="follow">
                 <span>
-                  {timelinePost &&
+                  {(timelinePost &&
                     timelinePost.filter(
                       (timelinePost) => timelinePost.userId === user._id
-                    ).length}
+                    ).length) ||
+                    0}
                 </span>
                 <span>Posts</span>
               </div>
