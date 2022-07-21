@@ -92,7 +92,6 @@ const ProfileCard = ({ location }) => {
           <Link
             to={`/profile/${user && user._id}`}
             style={{ textDecoration: "none", color: "inherit" }}
-            // onClick={handleTimeline}
           >
             My Profile
           </Link>
