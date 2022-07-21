@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { toast } from "react-toastify";
 import { FOLLOW_USER_RESET } from "../../Constants/userConstants";
@@ -8,6 +8,10 @@ import NoImg from "../../img/noProfile.jpg";
 
 const User = ({ follower }) => {
   const { userInfo } = useSelector((state) => state.registerUser);
+  const [following, setFollowing] = useState(
+    follower.followers.includes(userInfo._id)
+  );
+
   const { success, error } = useSelector((state) => state.followUser);
   const dispatch = useDispatch();
   const handleFollow = () => {
@@ -49,7 +53,7 @@ const User = ({ follower }) => {
         </div>
       </div>
       <button className="button fc-button" onClick={handleFollow}>
-        Follow
+        {following ? "Unfollow" : "Follow"}
       </button>
     </div>
   );
