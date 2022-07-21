@@ -8,6 +8,9 @@ import {
   FOLLOW_USER_REQUEST,
   FOLLOW_USER_SUCCESS,
   FOLLOW_USER_FAILURE,
+  UNFOLLOW_USER_REQUEST,
+  UNFOLLOW_USER_SUCCESS,
+  UNFOLLOW_USER_FAILURE,
 } from "../Constants/userConstants";
 import axios from "axios";
 
@@ -71,6 +74,30 @@ export const followUser = (id) => async (dispatch) => {
   } catch (error) {
     dispatch({
       type: FOLLOW_USER_FAILURE,
+      payload: error.response?.data.message
+        ? error.response.data.message
+        : error.response?.data
+        ? error.response.data
+        : error.message,
+    });
+  }
+};
+
+export const unFollowUser = (id) => async (dispatch) => {
+  try {
+    dispatch({ type: UNFOLLOW_USER_REQUEST });
+
+    const config = {
+      headers: {
+        "Content-Type": "application/json",
+      },
+    };
+
+    await axios.put(`http://localhost:5000/user/${id}/unfollow`, config);
+    dispatch({ type: UNFOLLOW_USER_SUCCESS });
+  } catch (error) {
+    dispatch({
+      type: UNFOLLOW_USER_FAILURE,
       payload: error.response?.data.message
         ? error.response.data.message
         : error.response?.data
