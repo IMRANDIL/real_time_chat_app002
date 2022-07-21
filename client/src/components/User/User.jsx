@@ -1,10 +1,17 @@
 import React from "react";
+
+import NoImg from "../../img/noProfile.jpg";
+
 const User = ({ follower }) => {
   return (
     <div className="follower">
       <div>
         <img
-          src={follower.img}
+          src={
+            follower.profilePicture
+              ? process.env.REACT_APP_PUBLIC_FOLDER + follower.profilePicture
+              : NoImg
+          }
           alt={follower.username}
           className="followerImg"
           draggable="false"
@@ -13,7 +20,7 @@ const User = ({ follower }) => {
           <span>
             {follower.firstname} {follower.lastname}
           </span>
-          <span>@{follower.username}</span>
+          <span>{follower.username}</span>
         </div>
       </div>
       <button className="button fc-button">Follow</button>
