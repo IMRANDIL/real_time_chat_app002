@@ -5,6 +5,9 @@ import {
   USER_UPDATE_FAILURE,
   USER_UPDATE_REQUEST,
   USER_UPDATE_SUCCESS,
+  FOLLOW_USER_REQUEST,
+  FOLLOW_USER_SUCCESS,
+  FOLLOW_USER_FAILURE,
 } from "../Constants/userConstants";
 import axios from "axios";
 
@@ -45,6 +48,29 @@ export const updateUser = (id, userData) => async (dispatch) => {
   } catch (error) {
     dispatch({
       type: USER_UPDATE_FAILURE,
+      payload: error.response?.data.message
+        ? error.response.data.message
+        : error.response?.data
+        ? error.response.data
+        : error.message,
+    });
+  }
+};
+
+export const followUser = (id) => async (dispatch) => {
+  try {
+    dispatch({ type: FOLLOW_USER_REQUEST });
+    const config = {
+      headers: {
+        "Content-Type": "application/json",
+      },
+    };
+
+    await axios.put(`http://localhost:5000/user/${id}/follow`, config);
+    dispatch({ type: FOLLOW_USER_SUCCESS });
+  } catch (error) {
+    dispatch({
+      type: FOLLOW_USER_FAILURE,
       payload: error.response?.data.message
         ? error.response.data.message
         : error.response?.data
