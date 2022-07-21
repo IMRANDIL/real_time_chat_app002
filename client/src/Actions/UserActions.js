@@ -71,9 +71,10 @@ export const followUser = (id, userData) => async (dispatch) => {
 
     await axios.put(
       `http://localhost:5000/user/${id}/follow`,
-      config,
-      userData
+      { userData },
+      config
     );
+
     dispatch({ type: FOLLOW_USER_SUCCESS });
   } catch (error) {
     dispatch({
@@ -99,8 +100,8 @@ export const unFollowUser = (id, userData) => async (dispatch) => {
 
     await axios.put(
       `http://localhost:5000/user/${id}/unfollow`,
-      config,
-      userData
+      { userData },
+      config
     );
     dispatch({ type: UNFOLLOW_USER_SUCCESS });
   } catch (error) {

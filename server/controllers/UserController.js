@@ -110,16 +110,16 @@ exports.deleteUser = async (req, res) => {
 exports.followUser = async (req, res) => {
   const { id } = req.params;
 
-  const { currentUserId } = req.body;
+  const { userData: _id } = req.body;
 
-  if (currentUserId === id) {
+  if (_id === id) {
     return res.status(403).json("Action forbidden");
   }
 
   try {
     const followUser = await User.findById(id);
 
-    const followingUser = await User.findById(currentUserId);
+    const followingUser = await User.findById(_id);
 
     if (!followUser || !followingUser) {
       return res.status(404).json({
@@ -127,8 +127,8 @@ exports.followUser = async (req, res) => {
       });
     }
 
-    if (!followUser.followers.includes(currentUserId)) {
-      await followUser.updateOne({ $push: { followers: currentUserId } });
+    if (!followUser.followers.includes(_id)) {
+      await followUser.updateOne({ $push: { followers: _id } });
       await followingUser.updateOne({ $push: { following: id } });
       res.status(200).json({ message: "User followed" });
     } else {
@@ -144,16 +144,16 @@ exports.followUser = async (req, res) => {
 exports.unFollowUser = async (req, res) => {
   const { id } = req.params;
 
-  const { currentUserId } = req.body;
+  const { userData: _id } = req.body;
 
-  if (currentUserId === id) {
+  if (_id === id) {
     res.status(403).json("Action forbidden");
   }
 
   try {
     const followUser = await User.findById(id);
 
-    const followingUser = await User.findById(currentUserId);
+    const followingUser = await User.findById(_id);
 
     if (!followUser || !followingUser) {
       return res.status(404).json({
@@ -161,8 +161,8 @@ exports.unFollowUser = async (req, res) => {
       });
     }
 
-    if (followUser.followers.includes(currentUserId)) {
-      await followUser.updateOne({ $pull: { followers: currentUserId } });
+    if (followUser.followers.includes(_id)) {
+      await followUser.updateOne({ $pull: { followers: _id } });
       await followingUser.updateOne({ $pull: { following: id } });
       res.status(200).json({ message: "User unFollowed" });
     } else {
