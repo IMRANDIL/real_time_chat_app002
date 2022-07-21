@@ -3,34 +3,39 @@ import { useSelector, useDispatch } from "react-redux";
 import { toast } from "react-toastify";
 import { FOLLOW_USER_RESET } from "../../Constants/userConstants";
 import { getTimelinePosts } from "../../Actions/PostActions";
-import { followUser, getUser } from "../../Actions/UserActions";
+import { followUser, getUser, unFollowUser } from "../../Actions/UserActions";
 import NoImg from "../../img/noProfile.jpg";
 
 const User = ({ follower }) => {
   const { userInfo } = useSelector((state) => state.registerUser);
-  const [following, setFollowing] = useState(
-    follower.followers.includes(userInfo._id)
-  );
+  // const [following, setFollowing] = useState(
+  //   follower.followers.includes(userInfo._id)
+  // );
 
-  const { success, error } = useSelector((state) => state.followUser);
+  const { success: followSuccess, error: followError } = useSelector(
+    (state) => state.followUser
+  );
+  // const { success: unFollowSuccess } = useSelector(
+  //   (state) => state.unFollowUser
+  // );
   const dispatch = useDispatch();
   const handleFollow = () => {
     dispatch(followUser(follower._id, userInfo._id));
   };
 
+  if (followError) {
+    toast.error(followError);
+    dispatch({
+      type:FOLLOW_USER_RESET
+    })
+  }
+
   useEffect(() => {
-    if (success) {
+    if (followSuccess) {
       dispatch(getUser(userInfo._id));
       dispatch(getTimelinePosts(userInfo._id));
     }
-
-    if (error) {
-      toast.error(error);
-      dispatch({
-        type: FOLLOW_USER_RESET,
-      });
-    }
-  }, [dispatch, success, error, userInfo]);
+  }, [dispatch, followSuccess, userInfo]);
 
   return (
     <div className="follower">
@@ -53,7 +58,7 @@ const User = ({ follower }) => {
         </div>
       </div>
       <button className="button fc-button" onClick={handleFollow}>
-        {following ? "Unfollow" : "Follow"}
+        Follow
       </button>
     </div>
   );
