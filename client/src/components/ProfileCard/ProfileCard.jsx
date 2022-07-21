@@ -4,11 +4,13 @@ import { toast } from "react-toastify";
 import { useSelector, useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 import NoImg from "../../img/noback.jpeg";
+import { getUser } from "../../Actions/UserActions";
 import noProfileImg from "../../img/noProfile.jpg";
 import { USER_GET_RESET } from "../../Constants/userConstants";
 
 const ProfileCard = ({ location }) => {
   const { user, error } = useSelector((state) => state.getUser);
+  const { userInfo } = useSelector((state) => state.registerUser);
   const { timelinePost, loading } = useSelector((state) => state.timelinePost);
   const serverPublicFolder = process.env.REACT_APP_PUBLIC_FOLDER;
   const dispatch = useDispatch();
@@ -20,7 +22,9 @@ const ProfileCard = ({ location }) => {
         type: USER_GET_RESET,
       });
     }
-  }, [error, dispatch]);
+
+    dispatch(getUser(userInfo._id));
+  }, [error, dispatch, userInfo]);
 
   return (
     <div className="profileCard">
@@ -49,22 +53,20 @@ const ProfileCard = ({ location }) => {
         <span>
           {user && user.firstname} {user && user.lastname}
         </span>
-        <span>
-          {user && user.worksAt ? user && user.worksAt : "Not updated"}
-        </span>
+        <span>{user && user.worksAt ? user.worksAt : "Not updated"}</span>
       </div>
 
       <div className="followStatus">
         <hr />
         <div>
           <div className="follow">
-            <span>{user && user.following.length}</span>
+            <span>{user && user.following?.length}</span>
             <span>Following</span>
           </div>
           <div className="vl"></div>
 
           <div className="follow">
-            <span>{user && user.followers.length}</span>
+            <span>{user && user.followers?.length}</span>
             <span>Follower</span>
           </div>
           {location === "profilePage" && (

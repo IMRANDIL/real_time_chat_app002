@@ -9,9 +9,9 @@ import { UilSearch } from "@iconscout/react-unicons";
 const LogoSearch = () => {
   const { userInfo } = useSelector((state) => state.registerUser);
   const dispatch = useDispatch();
-  const handleRefresh = () => {
-    dispatch(getUser(userInfo._id));
-  };
+  // const handleRefresh = () => {
+  //   dispatch(getUser(userInfo._id));
+  // };
 
   return (
     <div className="logoSearch">
@@ -20,7 +20,7 @@ const LogoSearch = () => {
           src={Logo}
           alt="logo-img"
           draggable="false"
-          onClick={handleRefresh}
+          // onClick={handleRefresh}
         />
       </Link>
 

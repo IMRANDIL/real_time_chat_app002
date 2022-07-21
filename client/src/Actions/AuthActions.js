@@ -101,4 +101,5 @@ export const logoutUser = () => (dispatch) => {
     type: TIMELINE_POST_RESET,
   });
   localStorage.removeItem("userInfo");
+  localStorage.removeItem("user");
 };

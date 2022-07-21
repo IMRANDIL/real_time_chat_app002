@@ -1,41 +1,44 @@
-import React, { useEffect, useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { toast } from "react-toastify";
-import { FOLLOW_USER_RESET } from "../../Constants/userConstants";
-import { getTimelinePosts } from "../../Actions/PostActions";
+import {
+  FOLLOW_USER_RESET,
+  UNFOLLOW_USER_RESET,
+} from "../../Constants/userConstants";
+// import { getTimelinePosts } from "../../Actions/PostActions";
 import { followUser, getUser, unFollowUser } from "../../Actions/UserActions";
 import NoImg from "../../img/noProfile.jpg";
 
 const User = ({ follower }) => {
   const { userInfo } = useSelector((state) => state.registerUser);
-  // const [following, setFollowing] = useState(
-  //   follower.followers.includes(userInfo._id)
-  // );
-
-  const { success: followSuccess, error: followError } = useSelector(
-    (state) => state.followUser
+  const { user } = useSelector((state) => state.getUser);
+  const [following, setFollowing] = useState(
+    follower.followers.includes(userInfo._id)
   );
-  // const { success: unFollowSuccess } = useSelector(
-  //   (state) => state.unFollowUser
-  // );
+
+  const { success: followSuccess } = useSelector((state) => state.followUser);
+  const { success: unFollowSuccess } = useSelector(
+    (state) => state.unFollowUser
+  );
   const dispatch = useDispatch();
   const handleFollow = () => {
-    dispatch(followUser(follower._id, userInfo._id));
+    following
+      ? dispatch(unFollowUser(follower._id, user._id))
+      : dispatch(followUser(follower._id, user._id));
+    setFollowing((prev) => !prev);
   };
 
-  if (followError) {
-    toast.error(followError);
-    dispatch({
-      type:FOLLOW_USER_RESET
-    })
-  }
-
   useEffect(() => {
-    if (followSuccess) {
+    if (followSuccess || unFollowSuccess) {
       dispatch(getUser(userInfo._id));
-      dispatch(getTimelinePosts(userInfo._id));
+      dispatch({
+        type: FOLLOW_USER_RESET,
+      });
+
+      dispatch({
+        type: UNFOLLOW_USER_RESET,
+      });
     }
-  }, [dispatch, followSuccess, userInfo]);
+  }, [dispatch, followSuccess, userInfo, unFollowSuccess]);
 
   return (
     <div className="follower">
@@ -58,7 +61,7 @@ const User = ({ follower }) => {
         </div>
       </div>
       <button className="button fc-button" onClick={handleFollow}>
-        Follow
+        {following ? "Unfollow" : "Follow"}
       </button>
     </div>
   );

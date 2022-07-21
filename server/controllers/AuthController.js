@@ -32,13 +32,19 @@ exports.registerUser = async (req, res) => {
     });
 
     res.status(201).json({
-      _id: user._id,
       username: user.username,
+      _id: user._id,
       firstname: user.firstname,
       lastname: user.lastname,
-      isAdmin: user.isAdmin,
-      followers: user.followers,
       following: user.following,
+      followers: user.followers,
+      profilePicture: user.profilePicture,
+      coverPicture: user.coverPicture,
+      livesin: user.livesin,
+      worksAt: user.worksAt,
+      country: user.country,
+      relationship: user.relationship,
+      isAdmin: user.isAdmin,
       createdAt: user.createdAt,
       updatedAt: user.updatedAt,
       token: generateJwt(user._id),
@@ -76,19 +82,25 @@ exports.loginUser = async (req, res) => {
         message: "Invalid Credentials",
       });
     }
-
+    const user = await User.findOne({ username }).select("-password");
     //now send the response...
 
     res.status(200).json({
-      _id: isUserExist._id,
-      username: isUserExist.username,
-      firstname: isUserExist.firstname,
-      lastname: isUserExist.lastname,
-      isAdmin: isUserExist.isAdmin,
-      followers: isUserExist.followers,
-      following: isUserExist.following,
-      createdAt: isUserExist.createdAt,
-      updatedAt: isUserExist.updatedAt,
+      username: user.username,
+      _id: user._id,
+      firstname: user.firstname,
+      lastname: user.lastname,
+      following: user.following,
+      followers: user.followers,
+      profilePicture: user.profilePicture,
+      coverPicture: user.coverPicture,
+      livesin: user.livesin,
+      worksAt: user.worksAt,
+      country: user.country,
+      relationship: user.relationship,
+      isAdmin: user.isAdmin,
+      createdAt: user.createdAt,
+      updatedAt: user.updatedAt,
       token: generateJwt(isUserExist._id),
     });
   } catch (error) {
