@@ -1,7 +1,7 @@
 import React from "react";
 const User = ({ follower }) => {
   return (
-    <div className="follower" key={follower.id}>
+    <div className="follower">
       <div>
         <img
           src={follower.img}
