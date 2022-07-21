@@ -9,7 +9,7 @@ import { USER_GET_RESET } from "../../Constants/userConstants";
 
 const ProfileCard = ({ location }) => {
   const { user, error } = useSelector((state) => state.getUser);
-  const { timelinePost } = useSelector((state) => state.timelinePost);
+  const { timelinePost, loading } = useSelector((state) => state.timelinePost);
   const serverPublicFolder = process.env.REACT_APP_PUBLIC_FOLDER;
   const dispatch = useDispatch();
 
@@ -73,6 +73,7 @@ const ProfileCard = ({ location }) => {
 
               <div className="follow">
                 <span>
+                  {loading && <p>...</p>}
                   {timelinePost &&
                     timelinePost.filter(
                       (timelinePost) => timelinePost.userId === user?._id
