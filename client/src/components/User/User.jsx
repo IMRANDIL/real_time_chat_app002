@@ -3,6 +3,8 @@ import React from "react";
 import NoImg from "../../img/noProfile.jpg";
 
 const User = ({ follower }) => {
+  const handleFollow = () => {};
+
   return (
     <div className="follower">
       <div>
@@ -23,7 +25,9 @@ const User = ({ follower }) => {
           <span>{follower.username}</span>
         </div>
       </div>
-      <button className="button fc-button">Follow</button>
+      <button className="button fc-button" onClick={handleFollow}>
+        Follow
+      </button>
     </div>
   );
 };
