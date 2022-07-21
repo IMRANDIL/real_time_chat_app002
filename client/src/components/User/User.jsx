@@ -1,4 +1,5 @@
 import React from "react";
+import { useSelector, useDispatch } from "react-redux";
 
 import NoImg from "../../img/noProfile.jpg";
 

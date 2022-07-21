@@ -60,7 +60,7 @@ export const updateUser = (id, userData) => async (dispatch) => {
   }
 };
 
-export const followUser = (id) => async (dispatch) => {
+export const followUser = (id, userData) => async (dispatch) => {
   try {
     dispatch({ type: FOLLOW_USER_REQUEST });
     const config = {
@@ -69,7 +69,11 @@ export const followUser = (id) => async (dispatch) => {
       },
     };
 
-    await axios.put(`http://localhost:5000/user/${id}/follow`, config);
+    await axios.put(
+      `http://localhost:5000/user/${id}/follow`,
+      config,
+      userData
+    );
     dispatch({ type: FOLLOW_USER_SUCCESS });
   } catch (error) {
     dispatch({
@@ -83,7 +87,7 @@ export const followUser = (id) => async (dispatch) => {
   }
 };
 
-export const unFollowUser = (id) => async (dispatch) => {
+export const unFollowUser = (id, userData) => async (dispatch) => {
   try {
     dispatch({ type: UNFOLLOW_USER_REQUEST });
 
@@ -93,7 +97,11 @@ export const unFollowUser = (id) => async (dispatch) => {
       },
     };
 
-    await axios.put(`http://localhost:5000/user/${id}/unfollow`, config);
+    await axios.put(
+      `http://localhost:5000/user/${id}/unfollow`,
+      config,
+      userData
+    );
     dispatch({ type: UNFOLLOW_USER_SUCCESS });
   } catch (error) {
     dispatch({
