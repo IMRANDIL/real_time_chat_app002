@@ -25,7 +25,7 @@ const FollowersCard = () => {
       <h3>People you may know</h3>
 
       {Followers.map((follower) => (
-        <User follower={follower} key={follower.id} />
+        <User follower={follower} key={follower._id} />
       ))}
     </div>
   );

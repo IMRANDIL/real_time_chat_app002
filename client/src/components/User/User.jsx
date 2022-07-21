@@ -10,7 +10,9 @@ const User = ({ follower }) => {
           draggable="false"
         />
         <div className="name">
-          <span>{follower.name}</span>
+          <span>
+            {follower.firstname} {follower.lastname}
+          </span>
           <span>@{follower.username}</span>
         </div>
       </div>
