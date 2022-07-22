@@ -45,63 +45,71 @@ const ChatBody = ({ chat, currentUserId }) => {
     chat && fetchMessage();
   }, [chat]);
 
-  const handleInputChange = () => {};
+  const handleInputChange = (newMessage) => {
+    setNewMessage(newMessage);
+  };
 
   return (
     <>
       <div className="ChatBox-container">
-        <>
-          <div className="chat-header">
-            <div className="follower">
-              <div>
-                <img
-                  src={
-                    userData?.profilePicture
-                      ? process.env.REACT_APP_PUBLIC_FOLDER +
-                        userData.profilePicture
-                      : noProfileImg
-                  }
-                  alt="user-img"
-                  draggable="false"
-                  className="followerImage"
-                  style={{ width: "50px", height: "50px" }}
-                />
-                <div className="name" style={{ fontSize: ".8rem" }}>
-                  <span>
-                    {userData?.firstname} {userData?.lastname}
-                  </span>
+        {chat ? (
+          <>
+            <div className="chat-header">
+              <div className="follower">
+                <div>
+                  <img
+                    src={
+                      userData?.profilePicture
+                        ? process.env.REACT_APP_PUBLIC_FOLDER +
+                          userData.profilePicture
+                        : noProfileImg
+                    }
+                    alt="user-img"
+                    draggable="false"
+                    className="followerImage"
+                    style={{ width: "50px", height: "50px" }}
+                  />
+                  <div className="name" style={{ fontSize: ".8rem" }}>
+                    <span>
+                      {userData?.firstname} {userData?.lastname}
+                    </span>
+                  </div>
                 </div>
               </div>
+              <hr style={{ width: "85%", border: "0.1px solid #ececec" }} />
             </div>
-            <hr style={{ width: "85%", border: "0.1px solid #ececec" }} />
-          </div>
 
-          {/* chatBox_Message */}
+            {/* chatBox_Message */}
 
-          <div className="chat-body">
-            {messages.map((message) => (
-              <div key={message._id}>
+            <div className="chat-body">
+              {messages.map((message) => (
                 <div
                   className={
                     message.senderId === currentUserId
                       ? "message own"
                       : "message"
                   }
+                  key={message._id}
                 >
                   <span>{message.text}</span>
                   <span>{format(message.createdAt)}</span>
                 </div>
-              </div>
-            ))}
-          </div>
+              ))}
+            </div>
 
-          {/* chatSender */}
+            {/* chatSender */}
 
-          <div className="chat-sender">
-            <div>+</div>
-            <InputEmoji value={newMessage} onChange={handleInputChange} />
-          </div>
-        </>
+            <div className="chat-sender">
+              <div>+</div>
+              <InputEmoji value={newMessage} onChange={handleInputChange} />
+              <div className="send-button button">Send</div>
+            </div>
+          </>
+        ) : (
+          <span className="chatbox-empty-message">
+            💌...Tap on a chat to start conversation...💌
+          </span>
+        )}
       </div>
     </>
   );
