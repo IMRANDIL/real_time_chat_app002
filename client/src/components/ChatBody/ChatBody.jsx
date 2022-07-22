@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import noProfileImg from "../../img/noProfile.jpg";
+import "./ChatBody.css";
 
 const ChatBody = ({ chat, currentUserId }) => {
   const [userData, setUserData] = useState(null);
@@ -72,7 +73,23 @@ const ChatBody = ({ chat, currentUserId }) => {
 
           {/* chatBox_Message */}
 
-          <div className="chat-body"></div>
+          <div className="chat-body">
+            {messages.map((message) => (
+              <>
+                <div
+                  className={
+                    message.senderId === currentUserId
+                      ? "message own"
+                      : "message"
+                  }
+                  key={message._id}
+                >
+                  <span>{message.text}</span>
+                  <span> {message.createdAt}</span>
+                </div>
+              </>
+            ))}
+          </div>
         </>
       </div>
     </>
