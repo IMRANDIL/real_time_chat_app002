@@ -36,7 +36,7 @@ const Chat = () => {
           <div className="Chat-list">
             {chats.map((chat) => (
               <div key={chat._id}>
-                <Conversation chat={chat} />
+                <Conversation chat={chat} currentUserId={userInfo._id} />
               </div>
             ))}
           </div>
