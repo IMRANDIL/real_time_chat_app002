@@ -4,7 +4,6 @@ import {
   FOLLOW_USER_RESET,
   UNFOLLOW_USER_RESET,
 } from "../../Constants/userConstants";
-// import { getTimelinePosts } from "../../Actions/PostActions";
 import { followUser, getUser, unFollowUser } from "../../Actions/UserActions";
 import NoImg from "../../img/noProfile.jpg";
 

@@ -12,7 +12,6 @@ function ProfileModel({ modalOpen, setModalOpen, user }) {
   const [formData, setFormData] = useState(user);
   const [profileImage, setProfileImage] = useState(null);
   const [coverImage, setCoverImage] = useState(null);
-  // const { userInfo } = useSelector((state) => state.registerUser);
   const dispatch = useDispatch();
   const { id } = useParams();
 
