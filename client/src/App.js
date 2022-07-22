@@ -6,6 +6,7 @@ import { useSelector } from "react-redux";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Signup from "./pages/Auth/Signup";
 import Login from "./pages/Auth/Login";
+import Chat from "./pages/Chat/Chat";
 
 function App() {
   const { userInfo } = useSelector((state) => state.registerUser);
@@ -23,7 +24,7 @@ function App() {
               path="/profile/:id"
               element={userInfo ? <Profile /> : <Signup />}
             />
-
+            <Route path="/chat" element={userInfo ? <Chat /> : <Signup />} />
             <Route path="/auth/register" element={<Signup />} />
             <Route path="/auth/login" element={<Login />} />
             <Route path="*" element={<Signup />} />

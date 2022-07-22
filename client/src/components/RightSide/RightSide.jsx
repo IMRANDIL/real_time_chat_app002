@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import "./RightSide.css";
 import Home from "../../img/home.png";
 import Noti from "../../img/noti.png";
+import { Link } from "react-router-dom";
 import Comment from "../../img/comment.png";
 import { UilSetting } from "@iconscout/react-unicons";
 import TrendCard from "../TrendCard/TrendCard";
@@ -16,7 +17,9 @@ const RightSide = () => {
         <img src={Home} alt="home-img" draggable="false" />
         <UilSetting />
         <img src={Noti} alt="noti-img" draggable="false" />
-        <img src={Comment} alt="comment-img" draggable="false" />
+        <Link to="/chat">
+          <img src={Comment} alt="comment-img" draggable="false" />
+        </Link>
       </div>
 
       <TrendCard />
