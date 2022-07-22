@@ -2,10 +2,13 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import noProfileImg from "../../img/noProfile.jpg";
 import "./ChatBody.css";
+import { format } from "timeago.js";
+import InputEmoji from "react-input-emoji";
 
 const ChatBody = ({ chat, currentUserId }) => {
   const [userData, setUserData] = useState(null);
   const [messages, setMessages] = useState([]);
+  const [newMessage, setNewMessage] = useState("");
   //fetching data for header
 
   useEffect(() => {
@@ -41,6 +44,8 @@ const ChatBody = ({ chat, currentUserId }) => {
 
     chat && fetchMessage();
   }, [chat]);
+
+  const handleInputChange = () => {};
 
   return (
     <>
@@ -85,10 +90,17 @@ const ChatBody = ({ chat, currentUserId }) => {
                   key={message._id}
                 >
                   <span>{message.text}</span>
-                  <span> {message.createdAt}</span>
+                  <span>{format(message.createdAt)}</span>
                 </div>
               </>
             ))}
+          </div>
+
+          {/* chatSender */}
+
+          <div className="chat-sender">
+            <div>+</div>
+            <InputEmoji value={newMessage} onChange={handleInputChange} />
           </div>
         </>
       </div>
