@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import "./Chat.css";
 import { useSelector } from "react-redux";
 import LogoSearch from "../../components/LogoSearch/LogoSearch";
@@ -10,12 +10,14 @@ import { Link } from "react-router-dom";
 import Comment from "../../img/comment.png";
 import { UilSetting } from "@iconscout/react-unicons";
 import ChatBody from "../../components/ChatBody/ChatBody";
+import { io } from "socket.io-client";
 
 const Chat = () => {
   const [chats, setChats] = useState([]);
   const [currentChat, setCurrentChat] = useState(null);
+  const [onlineUsers, setOnlineUsers] = useState([]);
   const { userInfo } = useSelector((state) => state.registerUser);
-
+  const socket = useRef();
   useEffect(() => {
     const fetchChats = async () => {
       try {
@@ -29,6 +31,14 @@ const Chat = () => {
     };
 
     fetchChats();
+  }, [userInfo]);
+
+  useEffect(() => {
+    socket.current = io(`http://localhost:8800`);
+    socket.current.emit("new-user-add", userInfo._id);
+    socket.current.on("get-users", (users) => {
+      setOnlineUsers(users);
+    });
   }, [userInfo]);
 
   return (

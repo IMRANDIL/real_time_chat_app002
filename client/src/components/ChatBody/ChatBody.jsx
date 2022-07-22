@@ -49,6 +49,21 @@ const ChatBody = ({ chat, currentUserId }) => {
     setNewMessage(newMessage);
   };
 
+  const handleSend = (e) => {
+    e.preventDefault();
+    const message = {
+      senderId: currentUserId,
+      text: newMessage,
+      chatId: chat._id,
+    };
+    //send message to db....
+
+    try {
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   return (
     <>
       <div className="ChatBox-container">
@@ -92,6 +107,7 @@ const ChatBody = ({ chat, currentUserId }) => {
                   key={message._id}
                 >
                   <span>{message.text}</span>
+
                   <span>{format(message.createdAt)}</span>
                 </div>
               ))}
@@ -102,7 +118,9 @@ const ChatBody = ({ chat, currentUserId }) => {
             <div className="chat-sender">
               <div>+</div>
               <InputEmoji value={newMessage} onChange={handleInputChange} />
-              <div className="send-button button">Send</div>
+              <div className="send-button button" onClick={handleSend}>
+                Send
+              </div>
             </div>
           </>
         ) : (
