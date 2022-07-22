@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import noProfileImg from "../../img/noProfile.jpg";
+
 const ChatBody = ({ chat, currentUserId }) => {
   const [userData, setUserData] = useState(null);
-
+  const [messages, setMessages] = useState([]);
   //fetching data for header
 
   useEffect(() => {
@@ -15,13 +16,30 @@ const ChatBody = ({ chat, currentUserId }) => {
           `http://localhost:5000/user/${userId}`
         );
         setUserData(data);
-        console.log(data);
       } catch (error) {
         console.log(error);
       }
     };
     chat && fetchUserData();
   }, [chat, currentUserId]);
+
+  //fetching messages......
+
+  useEffect(() => {
+    const fetchMessage = async () => {
+      try {
+        const { data } = await axios.get(
+          `http://localhost:5000/message/${chat._id}`
+        );
+        setMessages(data);
+        console.log(data);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+
+    chat && fetchMessage();
+  }, [chat]);
 
   return (
     <>
@@ -51,6 +69,10 @@ const ChatBody = ({ chat, currentUserId }) => {
             </div>
             <hr style={{ width: "85%", border: "0.1px solid #ececec" }} />
           </div>
+
+          {/* chatBox_Message */}
+
+          <div className="chat-body"></div>
         </>
       </div>
     </>

@@ -36,7 +36,7 @@ const Chat = () => {
       {/* LeftSide */}
       <div className="Left-side-chat">
         <LogoSearch />
-        <div className="Chat-container">
+        <div className="ChatBox-container">
           <h2>Chats</h2>
           <div className="Chat-list">
             {chats.map((chat) => (
