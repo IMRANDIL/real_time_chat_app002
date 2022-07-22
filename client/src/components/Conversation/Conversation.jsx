@@ -20,27 +20,31 @@ const Conversation = ({ chat, currentUserId }) => {
   }, [chat, currentUserId, userData]);
 
   return (
-    <div className="follower conversation">
-      <div>
-        <div className="online-dot"></div>
-        <img
-          src={
-            userData?.profilePicture
-              ? process.env.REACT_APP_PUBLIC_FOLDER + userData.profilePicture
-              : noProfileImg
-          }
-          alt="user-img"
-          draggable="false"
-          className="followerImage"
-          style={{ width: "50px", height: "50px" }}
-        />
-        <div className="name" style={{ fontSize: ".8rem" }}>
-          <span>
-            {userData?.firstname} {userData?.lastname}
-          </span>
+    <>
+      <div className="follower conversation">
+        <div>
+          <div className="online-dot"></div>
+          <img
+            src={
+              userData?.profilePicture
+                ? process.env.REACT_APP_PUBLIC_FOLDER + userData.profilePicture
+                : noProfileImg
+            }
+            alt="user-img"
+            draggable="false"
+            className="followerImage"
+            style={{ width: "50px", height: "50px" }}
+          />
+          <div className="name" style={{ fontSize: ".8rem" }}>
+            <span>
+              {userData?.firstname} {userData?.lastname}
+            </span>
+            <span>Online</span>
+          </div>
         </div>
       </div>
-    </div>
+      <hr style={{ width: "85%", border: "0.1px solid #ececec" }} />
+    </>
   );
 };
 

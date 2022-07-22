@@ -4,6 +4,12 @@ import { useSelector } from "react-redux";
 import LogoSearch from "../../components/LogoSearch/LogoSearch";
 import axios from "axios";
 import Conversation from "../../components/Conversation/Conversation";
+import Home from "../../img/home.png";
+import Noti from "../../img/noti.png";
+import { Link } from "react-router-dom";
+import Comment from "../../img/comment.png";
+import { UilSetting } from "@iconscout/react-unicons";
+import ChatBody from "../../components/ChatBody/ChatBody";
 
 const Chat = () => {
   const [chats, setChats] = useState([]);
@@ -17,7 +23,6 @@ const Chat = () => {
           `http://localhost:5000/chat/${userInfo._id}`
         );
         setChats(data);
-        console.log(data);
       } catch (error) {
         console.log(error);
       }
@@ -44,7 +49,21 @@ const Chat = () => {
       </div>
 
       {/* RightSide */}
-      <div className="Right-side-chat">Right side</div>
+      <div className="Right-side-chat">
+        <div style={{ width: "20rem", alignSelf: "flex-end" }}>
+          <div className="navIcons">
+            <img src={Home} alt="home-img" draggable="false" />
+            <UilSetting />
+            <img src={Noti} alt="noti-img" draggable="false" />
+            <Link to="/chat">
+              <img src={Comment} alt="comment-img" draggable="false" />
+            </Link>
+          </div>
+          {/* chatBody */}
+
+          <ChatBody currentUserId={userInfo._id} chats={chats} />
+        </div>
+      </div>
     </div>
   );
 };
