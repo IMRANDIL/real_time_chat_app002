@@ -1,8 +1,10 @@
-import React from "react";
+import React, { useState } from "react";
 import "./Chat.css";
 import LogoSearch from "../../components/LogoSearch/LogoSearch";
 
 const Chat = () => {
+  const [chats, setChats] = useState([]);
+
   return (
     <div className="Chat">
       {/* LeftSide */}
