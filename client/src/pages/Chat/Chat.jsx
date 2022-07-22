@@ -13,7 +13,7 @@ import ChatBody from "../../components/ChatBody/ChatBody";
 
 const Chat = () => {
   const [chats, setChats] = useState([]);
-
+  const [currentChat, setCurrentChat] = useState(null);
   const { userInfo } = useSelector((state) => state.registerUser);
 
   useEffect(() => {
@@ -40,7 +40,7 @@ const Chat = () => {
           <h2>Chats</h2>
           <div className="Chat-list">
             {chats.map((chat) => (
-              <div key={chat._id}>
+              <div key={chat._id} onClick={() => setCurrentChat(chat)}>
                 <Conversation chat={chat} currentUserId={userInfo._id} />
               </div>
             ))}
@@ -59,10 +59,10 @@ const Chat = () => {
               <img src={Comment} alt="comment-img" draggable="false" />
             </Link>
           </div>
-          {/* chatBody */}
-
-          <ChatBody currentUserId={userInfo._id} chats={chats} />
         </div>
+        {/* chatBody */}
+
+        <ChatBody currentUserId={userInfo._id} chat={currentChat} />
       </div>
     </div>
   );
