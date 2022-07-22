@@ -1,9 +1,12 @@
 import React, { useState } from "react";
 import "./Chat.css";
+import { useSelector } from "react-redux";
 import LogoSearch from "../../components/LogoSearch/LogoSearch";
 
 const Chat = () => {
   const [chats, setChats] = useState([]);
+
+  const { userInfo } = useSelector((state) => state.registerUser);
 
   return (
     <div className="Chat">
