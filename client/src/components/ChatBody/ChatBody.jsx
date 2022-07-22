@@ -80,19 +80,18 @@ const ChatBody = ({ chat, currentUserId }) => {
 
           <div className="chat-body">
             {messages.map((message) => (
-              <>
+              <div key={message._id}>
                 <div
                   className={
                     message.senderId === currentUserId
                       ? "message own"
                       : "message"
                   }
-                  key={message._id}
                 >
                   <span>{message.text}</span>
                   <span>{format(message.createdAt)}</span>
                 </div>
-              </>
+              </div>
             ))}
           </div>
 
