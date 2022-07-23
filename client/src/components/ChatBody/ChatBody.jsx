@@ -36,7 +36,6 @@ const ChatBody = ({ chat, currentUserId }) => {
           `http://localhost:5000/message/${chat._id}`
         );
         setMessages(data);
-        console.log(data);
       } catch (error) {
         console.log(error);
       }
@@ -49,7 +48,7 @@ const ChatBody = ({ chat, currentUserId }) => {
     setNewMessage(newMessage);
   };
 
-  const handleSend = (e) => {
+  const handleSend = async (e) => {
     e.preventDefault();
     const message = {
       senderId: currentUserId,
@@ -59,6 +58,17 @@ const ChatBody = ({ chat, currentUserId }) => {
     //send message to db....
 
     try {
+      const config = {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      };
+      const { data } = await axios.post(
+        `http://localhost:5000/message`,
+        message,
+        config
+      );
+      setMessages([...messages, data]);
     } catch (error) {
       console.log(error);
     }
