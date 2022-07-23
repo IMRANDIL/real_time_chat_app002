@@ -23,7 +23,7 @@ const Conversation = ({ chat, currentUserId, online }) => {
     <>
       <div className="follower conversation">
         <div>
-          {online && <div className="online-dot">Online</div>}
+          {online && <div className="online-dot"></div>}
 
           <img
             src={
@@ -40,7 +40,7 @@ const Conversation = ({ chat, currentUserId, online }) => {
             <span>
               {userData?.firstname} {userData?.lastname}
             </span>
-            <span>Online</span>
+            <span>{online ? "Online" : "Offline"}</span>
           </div>
         </div>
       </div>

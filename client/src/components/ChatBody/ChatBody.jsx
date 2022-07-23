@@ -71,6 +71,7 @@ const ChatBody = ({ chat, currentUserId, setSendMessage, receiveMessage }) => {
       );
       setMessages([...messages, data]);
       setNewMessage("");
+      scroll.current = "";
     } catch (error) {
       console.log(error);
     }
