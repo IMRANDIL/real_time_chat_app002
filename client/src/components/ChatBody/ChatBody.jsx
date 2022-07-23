@@ -1,14 +1,15 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import axios from "axios";
 import noProfileImg from "../../img/noProfile.jpg";
 import "./ChatBody.css";
 import { format } from "timeago.js";
 import InputEmoji from "react-input-emoji";
 
-const ChatBody = ({ chat, currentUserId }) => {
+const ChatBody = ({ chat, currentUserId, setSendMessage, receiveMessage }) => {
   const [userData, setUserData] = useState(null);
   const [messages, setMessages] = useState([]);
   const [newMessage, setNewMessage] = useState("");
+  const scroll = useRef();
   //fetching data for header
 
   useEffect(() => {
@@ -69,11 +70,20 @@ const ChatBody = ({ chat, currentUserId }) => {
         config
       );
       setMessages([...messages, data]);
+      setNewMessage("");
     } catch (error) {
       console.log(error);
     }
+    //send message to socket server....
+    const receiverId = chat.members.find((id) => id !== currentUserId);
+    setSendMessage({ ...message, receiverId });
   };
 
+  useEffect(() => {
+    if (receiveMessage !== null && receiveMessage.chatId === chat._id) {
+      setMessages([...messages, receiveMessage]);
+    }
+  }, [receiveMessage, chat, messages]);
   return (
     <>
       <div className="ChatBox-container">
