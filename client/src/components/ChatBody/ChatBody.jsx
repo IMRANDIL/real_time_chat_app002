@@ -84,6 +84,11 @@ const ChatBody = ({ chat, currentUserId, setSendMessage, receiveMessage }) => {
       setMessages([...messages, receiveMessage]);
     }
   }, [receiveMessage, chat, messages]);
+
+  useEffect(() => {
+    scroll.current?.scrollIntoView({ behavior: "smooth" });
+  }, [messages]);
+
   return (
     <>
       <div className="ChatBox-container">
@@ -119,6 +124,7 @@ const ChatBody = ({ chat, currentUserId, setSendMessage, receiveMessage }) => {
             <div className="chat-body">
               {messages.map((message) => (
                 <div
+                  ref={scroll}
                   className={
                     message.senderId === currentUserId
                       ? "message own"
