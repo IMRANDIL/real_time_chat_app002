@@ -1,7 +1,7 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import noProfileImg from "../../img/noProfile.jpg";
-const Conversation = ({ chat, currentUserId }) => {
+const Conversation = ({ chat, currentUserId, online }) => {
   const [userData, setUserData] = useState(null);
 
   useEffect(() => {
@@ -23,7 +23,8 @@ const Conversation = ({ chat, currentUserId }) => {
     <>
       <div className="follower conversation">
         <div>
-          <div className="online-dot"></div>
+          {online && <div className="online-dot">Online</div>}
+
           <img
             src={
               userData?.profilePicture
