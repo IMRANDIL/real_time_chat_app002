@@ -56,6 +56,11 @@ const ChatBody = ({ chat, currentUserId, setSendMessage, receiveMessage }) => {
       text: newMessage,
       chatId: chat._id,
     };
+
+    //send message to socket server....
+    const receiverId = chat.members.find((id) => id !== currentUserId);
+    setSendMessage({ ...message, receiverId });
+
     //send message to db....
 
     try {
@@ -75,16 +80,13 @@ const ChatBody = ({ chat, currentUserId, setSendMessage, receiveMessage }) => {
     } catch (error) {
       console.log(error);
     }
-    //send message to socket server....
-    const receiverId = chat.members.find((id) => id !== currentUserId);
-    setSendMessage({ ...message, receiverId });
   };
 
   useEffect(() => {
     if (receiveMessage !== null && receiveMessage.chatId === chat._id) {
       setMessages([...messages, receiveMessage]);
     }
-  }, [receiveMessage, chat, messages]);
+  }, [receiveMessage, chat]);
 
   useEffect(() => {
     scroll.current?.scrollIntoView({ behavior: "smooth" });

@@ -33,7 +33,7 @@ const Chat = () => {
     };
 
     fetchChats();
-  }, [userInfo]);
+  }, [userInfo._id]);
 
   useEffect(() => {
     socket.current = io(`http://localhost:8800`);
